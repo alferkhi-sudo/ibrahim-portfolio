@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getMovieBySlug, getAllMovieSlugs, getAllMovies } from "@/lib/mdx";
@@ -10,6 +11,20 @@ const FEATURED_SLUGS = ["romeria", "500-days-of-summer"];
 export function generateStaticParams() {
   const slugs = getAllMovieSlugs();
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params: { slug },
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const movie = getMovieBySlug(slug);
+  if (!movie) return {};
+  const { frontmatter } = movie;
+  return {
+    title: `${frontmatter.title} (${frontmatter.year}) — Ibrahim`,
+    description: frontmatter.excerpt,
+  };
 }
 
 export default async function MovieReviewPage({

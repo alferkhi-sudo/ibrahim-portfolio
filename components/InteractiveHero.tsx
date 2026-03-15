@@ -2,16 +2,20 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import BackgroundShapes from "./BackgroundShapes";
 
 export default function InteractiveHero() {
-  const grainRef = useRef<SVGFETurbulenceElement>(null);
-  const rafRef   = useRef<number>(0);
-  const frameRef = useRef(0);
+  const grainRef            = useRef<SVGFETurbulenceElement>(null);
+  const rafRef              = useRef<number>(0);
+  const frameRef            = useRef(0);
+  const prefersReducedMotion = useReducedMotion();
 
   // Animate SVG feTurbulence seed → authentic film-grain flicker
+  // Skip for users who prefer reduced motion
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const tick = () => {
       frameRef.current++;
       // Update every 3rd frame (~20 fps) for that classic grain feel
@@ -31,7 +35,7 @@ export default function InteractiveHero() {
       cancelAnimationFrame(rafRef.current);
       clearTimeout(stop);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section className="relative h-[calc(10vh_+_79vw_+_116px)] md:h-screen bg-[var(--bg)] overflow-hidden">
@@ -56,30 +60,18 @@ export default function InteractiveHero() {
       {/* ── LAYER 2 · Developing portrait — the film develop animation ── */}
       <motion.div
         className="absolute inset-0 flex items-end justify-center pb-8 md:pb-12 z-[4]"
-        initial={{
+        initial={prefersReducedMotion ? false : {
           filter:
             "brightness(0.12) saturate(0) sepia(1.8) blur(8px) contrast(2.4)",
           opacity: 0.85,
         }}
         animate={{
-          filter: [
-            // ① Blank paper in developer — nearly black, heavy sepia
-            "brightness(0.12) saturate(0)    sepia(1.8)  blur(8px)   contrast(2.4)",
-            // ② Shadows emerge — dark forms visible, still desaturated
-            "brightness(0.30) saturate(0.06) sepia(1.2)  blur(5px)   contrast(1.9)",
-            // ③ Midtones develop — image recognisable, warm bleed
-            "brightness(0.58) saturate(0.28) sepia(0.65) blur(2.5px) contrast(1.35)",
-            // ④ Highlights fill in — almost there, hint of colour
-            "brightness(0.85) saturate(0.72) sepia(0.18) blur(0.8px) contrast(1.06)",
-            // ⑤ Fully developed — crisp, natural colour
-            "brightness(1.02) saturate(1.0)  sepia(0)    blur(0px)   contrast(1.0)",
-          ],
-          opacity: [0.85, 0.9, 0.95, 1, 1],
+          filter: "brightness(1.02) saturate(1.0) sepia(0) blur(0px) contrast(1.0)",
+          opacity: 1,
         }}
-        transition={{
+        transition={prefersReducedMotion ? { duration: 0 } : {
           duration: 3.6,
           ease: [0.22, 0.1, 0.22, 1.0],
-          times: [0, 0.18, 0.48, 0.78, 1],
         }}
       >
         <div className="relative w-[88vw] md:w-[85vw] max-w-[1000px] h-[79vw] md:h-[80vh] overflow-hidden">
@@ -96,35 +88,39 @@ export default function InteractiveHero() {
       </motion.div>
 
       {/* ── LAYER 3 · Amber chemical wash (darkroom developer tray) ── */}
-      <motion.div
-        className="absolute inset-0 z-[5] pointer-events-none"
-        initial={{ opacity: 0.8 }}
-        animate={{ opacity: 0 }}
-        transition={{ duration: 4.0, ease: [0.4, 0, 0.15, 1], delay: 0 }}
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 90% at 50% 55%, rgba(195,128,38,0.58) 0%, rgba(135,65,12,0.68) 55%, rgba(70,22,4,0.78) 100%)",
-        }}
-      />
+      {!prefersReducedMotion && (
+        <motion.div
+          className="absolute inset-0 z-[5] pointer-events-none"
+          initial={{ opacity: 0.8 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 4.0, ease: [0.4, 0, 0.15, 1], delay: 0 }}
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 90% at 50% 55%, rgba(195,128,38,0.58) 0%, rgba(135,65,12,0.68) 55%, rgba(70,22,4,0.78) 100%)",
+          }}
+        />
+      )}
 
       {/* ── LAYER 4 · Dark vignette — lifts as image develops ── */}
-      <motion.div
-        className="absolute inset-0 z-[5] pointer-events-none"
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        transition={{ duration: 2.8, ease: "easeOut", delay: 0.15 }}
-        style={{
-          background:
-            "radial-gradient(ellipse 52% 62% at 50% 50%, transparent 20%, rgba(0,0,0,0.88) 100%)",
-        }}
-      />
+      {!prefersReducedMotion && (
+        <motion.div
+          className="absolute inset-0 z-[5] pointer-events-none"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 2.8, ease: "easeOut", delay: 0.15 }}
+          style={{
+            background:
+              "radial-gradient(ellipse 52% 62% at 50% 50%, transparent 20%, rgba(0,0,0,0.88) 100%)",
+          }}
+        />
+      )}
 
       {/* ── LAYER 5 · Film grain (mix-blend overlay, fades out) ── */}
       <motion.div
         className="absolute inset-0 z-[6] pointer-events-none"
-        initial={{ opacity: 0.6 }}
+        initial={{ opacity: prefersReducedMotion ? 0 : 0.6 }}
         animate={{ opacity: 0 }}
-        transition={{ duration: 4.2, ease: "easeIn", delay: 0.2 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 4.2, ease: "easeIn", delay: 0.2 }}
         style={{ mixBlendMode: "overlay" }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -163,11 +159,11 @@ export default function InteractiveHero() {
           <motion.h1
             className="font-black tracking-tighter leading-[0.85] uppercase"
             style={{ fontSize: "clamp(3rem, 12vw, 11rem)", color: "var(--fg)" }}
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: 1.0,
-              delay: 2.2,
+              duration: prefersReducedMotion ? 0.3 : 1.0,
+              delay: prefersReducedMotion ? 0 : 2.2,
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
@@ -177,9 +173,9 @@ export default function InteractiveHero() {
           <motion.p
             className="mt-2 md:mt-4 text-base md:text-lg tracking-wide text-center md:text-left"
             style={{ color: "#888" }}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 2.6, ease: "easeOut" }}
+            transition={{ duration: prefersReducedMotion ? 0.3 : 0.9, delay: prefersReducedMotion ? 0.1 : 2.6, ease: "easeOut" }}
           >
             Lens. Screen. Moments.
           </motion.p>

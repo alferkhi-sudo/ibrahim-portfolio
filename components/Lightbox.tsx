@@ -75,11 +75,11 @@ export default function Lightbox({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Close button — larger touch target */}
+      {/* Close button — 44px minimum touch target */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white transition-colors z-10 p-2"
-        aria-label="Close"
+        className="absolute top-3 right-3 md:top-5 md:right-5 text-white/70 hover:text-white transition-colors z-10 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
+        aria-label="Close lightbox"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <line x1="18" y1="6" x2="6" y2="18" />

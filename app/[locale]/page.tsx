@@ -1,10 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import InteractiveHero from "@/components/InteractiveHero";
 import ScrollMarquee from "@/components/ScrollMarquee";
-import ScrollRevealText from "@/components/ScrollRevealText";
-import EditorialSections from "@/components/EditorialSections";
-import SocialFanOut from "@/components/SocialFanOut";
+
+// Lazy-load below-the-fold components for faster initial page load
+const ScrollRevealText  = dynamic(() => import("@/components/ScrollRevealText"));
+const EditorialSections = dynamic(() => import("@/components/EditorialSections"));
+const SocialFanOut      = dynamic(() => import("@/components/SocialFanOut"));
 
 export default function HomePage() {
   return (

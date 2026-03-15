@@ -83,10 +83,17 @@ export default function SocialFanOut() {
   const isInView     = useInView(containerRef, { once: true, margin: "-120px" });
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
+    setIsMobile(window.innerWidth < 768);
+    let timeout: ReturnType<typeof setTimeout>;
+    const check = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setIsMobile(window.innerWidth < 768), 150);
+    };
     window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    return () => {
+      window.removeEventListener("resize", check);
+      clearTimeout(timeout);
+    };
   }, []);
 
   /* Mark as ready after fan-out completes (~1.2 s max stagger) */

@@ -19,10 +19,17 @@ export default function SectionReveal({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
+    setIsMobile(window.innerWidth < 768);
+    let timeout: ReturnType<typeof setTimeout>;
+    const check = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setIsMobile(window.innerWidth < 768), 150);
+    };
     window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    return () => {
+      window.removeEventListener("resize", check);
+      clearTimeout(timeout);
+    };
   }, []);
 
   // Smaller offset on mobile for smoother animations

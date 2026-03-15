@@ -2,11 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import SectionReveal from "./SectionReveal";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 const socialLinks = [
   {
     name: "Instagram",
-    href: "https://instagram.com",
+    href: SOCIAL_LINKS.instagram.url,
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -17,7 +18,7 @@ const socialLinks = [
   },
   {
     name: "Letterboxd",
-    href: "https://letterboxd.com",
+    href: SOCIAL_LINKS.letterboxd.url,
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
         <circle cx="8" cy="12" r="4" opacity="0.8" />
@@ -27,7 +28,7 @@ const socialLinks = [
   },
   {
     name: "X",
-    href: "https://x.com",
+    href: SOCIAL_LINKS.x.url,
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />

@@ -1,15 +1,29 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { cityGuides } from "@/lib/data/cityGuides";
+
+export async function generateMetadata({
+  params: { city: citySlug, guide: guideId },
+}: {
+  params: { city: string; guide: string };
+}): Promise<Metadata> {
+  const guides = cityGuides[citySlug];
+  const guide = guides?.find((g) => g.id === guideId);
+  if (!guide) return {};
+  return {
+    title: `${guide.title} — Ibrahim`,
+    description: guide.longDescription,
+  };
+}
 
 export default async function GuidePage({
   params: { locale, city: citySlug, guide: guideId },
 }: {
   params: { locale: string; city: string; guide: string };
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const _t = await getTranslations("travel");
+  const t = await getTranslations("travel");
   const guides = cityGuides[citySlug];
   const guide = guides?.find((g) => g.id === guideId);
 
@@ -29,11 +43,11 @@ export default async function GuidePage({
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            Back to {cityName}
+            {t("backToCity", { cityName })}
           </Link>
 
           <p className="text-xs uppercase tracking-widest text-[var(--fg-muted)] mb-4">
-            Google Maps List
+            {t("googleMapsList")}
           </p>
 
           <h1
@@ -58,7 +72,7 @@ export default async function GuidePage({
       <section className="px-5 md:px-10 lg:px-6 py-10 md:py-14">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xs uppercase tracking-widest text-[var(--fg-muted)] mb-8">
-            What&apos;s included
+            {t("whatsIncluded")}
           </h2>
 
           <ul className="space-y-4">
@@ -84,7 +98,7 @@ export default async function GuidePage({
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div>
             <p className="text-xs uppercase tracking-widest text-[var(--fg-muted)] mb-1">
-              Price
+              {t("price")}
             </p>
             <p className="text-3xl md:text-4xl font-bold text-[var(--fg)] tracking-tight">
               {guide.price}
@@ -96,7 +110,7 @@ export default async function GuidePage({
             disabled
             className="inline-flex items-center justify-center gap-2 text-sm uppercase tracking-widest text-[var(--fg-subtle)] border border-[var(--border)] px-8 py-4 rounded-full cursor-not-allowed"
           >
-            Buy — Coming Soon
+            {t("buyComingSoon")}
           </button>
         </div>
       </section>

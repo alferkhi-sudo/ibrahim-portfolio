@@ -1,10 +1,30 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
 import SectionReveal from "@/components/SectionReveal";
 import { cityGuides } from "@/lib/data/cityGuides";
+
+export async function generateMetadata({
+  params: { city: citySlug },
+}: {
+  params: { city: string };
+}): Promise<Metadata> {
+  const cityName = citySlug.charAt(0).toUpperCase() + citySlug.slice(1);
+  const guides = cityGuides[citySlug];
+  if (guides) {
+    return {
+      title: `${cityName} Maps & Lists — Ibrahim`,
+      description: `Curated Google Maps guides for ${cityName}. Hand-picked restaurants, cafés, and hidden gems.`,
+    };
+  }
+  return {
+    title: `${cityName} Guide — Ibrahim`,
+    description: `Explore ${cityName} with curated spot recommendations from Ibrahim.`,
+  };
+}
 
 interface Spot {
   name: string;
@@ -64,7 +84,7 @@ export default async function CityMapsPage({
               {cityName}
             </h1>
             <p className="mt-2 text-sm md:text-base text-[#888888] font-light">
-              Curated Google Maps lists — pick what suits your trip.
+              {t("cityGuideTagline")}
             </p>
           </div>
         </section>
@@ -86,7 +106,7 @@ export default async function CityMapsPage({
 
                     <div className="mt-6 flex items-center justify-between">
                       <span className="text-xs uppercase tracking-widest text-[var(--fg-muted)]">
-                        Google Maps List
+                        {t("googleMapsList")}
                       </span>
                       <span className="text-xs uppercase tracking-widest text-[var(--fg)] border border-[var(--border-md)] px-4 py-2 rounded-full">
                         {guide.price}

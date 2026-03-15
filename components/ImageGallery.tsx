@@ -34,7 +34,16 @@ export default function ImageGallery({ photos }: ImageGalleryProps) {
               ease: [0.25, 0.1, 0.25, 1],
             }}
             className="break-inside-avoid cursor-pointer group"
+            role="button"
+            tabIndex={0}
+            aria-label={`View photo: ${photo.alt}`}
             onClick={() => setLightboxIndex(index)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setLightboxIndex(index);
+              }
+            }}
           >
             <div
               className="relative overflow-hidden rounded-lg placeholder-image transition-transform duration-500 group-hover:scale-[1.02]"

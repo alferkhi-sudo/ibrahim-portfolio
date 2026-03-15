@@ -72,7 +72,13 @@
     "comingSoon": "Coming Soon",
     "backToTravel": "Back to Travel",
     "backToMaps": "Back to Maps & Lists",
-    "openInMaps": "Open in Maps"
+    "openInMaps": "Open in Maps",
+    "backToCity": "Back to {cityName}",
+    "googleMapsList": "Google Maps List",
+    "cityGuideTagline": "Curated Google Maps lists — pick what suits your trip.",
+    "whatsIncluded": "What's included",
+    "price": "Price",
+    "buyComingSoon": "Buy — Coming Soon"
   },
   "movies": {
     "title": "Cinema",

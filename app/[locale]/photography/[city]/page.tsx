@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getCityBySlug, cities as allCities } from "@/data/photography";
 import { notFound } from "next/navigation";
@@ -7,6 +8,19 @@ import SectionReveal from "@/components/SectionReveal";
 
 export function generateStaticParams() {
   return allCities.map((city) => ({ city: city.slug }));
+}
+
+export async function generateMetadata({
+  params: { city: citySlug },
+}: {
+  params: { city: string };
+}): Promise<Metadata> {
+  const city = getCityBySlug(citySlug);
+  if (!city) return {};
+  return {
+    title: `${city.name} — Photography — Ibrahim`,
+    description: `Photography from ${city.name}. A curated gallery of frames and moments captured through my lens.`,
+  };
 }
 
 export default async function CityGalleryPage({

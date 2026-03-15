@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import ComingSoon from "@/components/ComingSoon";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 export default function VideographyPage() {
   const t = useTranslations("videography");
@@ -36,7 +37,7 @@ export default function VideographyPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            href="https://instagram.com"
+            href={SOCIAL_LINKS.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300 py-2"
