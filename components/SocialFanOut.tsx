@@ -105,9 +105,9 @@ export default function SocialFanOut() {
   const wrapH  = cardH + 60;
 
   const socials = [
-    { name: "LETTERBOXD", href: "https://letterboxd.com/ibrahim" },
-    { name: "INSTAGRAM",  href: "https://instagram.com/ibrahim"  },
-    { name: "X",          href: "https://x.com/ibrahim"          },
+    { name: "LETTERBOXD", href: "https://letterboxd.com/ibra14" },
+    { name: "INSTAGRAM",  href: "https://instagram.com/ibrahimferkh"  },
+    { name: "X",          href: "https://x.com/ibrahimferkh"          },
   ];
 
   return (
