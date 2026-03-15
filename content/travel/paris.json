@@ -1,0 +1,111 @@
+{
+  "city": "Paris",
+  "hero_image": "/images/travel/paris-hero.jpg",
+  "categories": [
+    {
+      "name": "Landmarks & Must-See",
+      "spots": [
+        {
+          "name": "Eiffel Tower",
+          "description": "The iconic iron lattice tower on the Champ de Mars — best viewed at sunset.",
+          "neighborhood": "7th arrondissement"
+        },
+        {
+          "name": "Sacré-Cœur",
+          "description": "The white basilica atop Montmartre with sweeping views of Paris.",
+          "neighborhood": "Montmartre"
+        },
+        {
+          "name": "Musée d'Orsay",
+          "description": "Impressionist masterpieces housed in a stunning Beaux-Arts railway station.",
+          "neighborhood": "7th arrondissement"
+        },
+        {
+          "name": "Le Marais",
+          "description": "Historic neighborhood with art galleries, vintage shops, and hidden courtyards.",
+          "neighborhood": "3rd & 4th arrondissement"
+        }
+      ]
+    },
+    {
+      "name": "Cafés & Coffee",
+      "spots": [
+        {
+          "name": "Café de Flore",
+          "description": "Iconic Parisian café in Saint-Germain, once home to Sartre and de Beauvoir.",
+          "neighborhood": "6th arrondissement"
+        },
+        {
+          "name": "Coutume Café",
+          "description": "Third-wave specialty coffee in a beautifully minimal space.",
+          "neighborhood": "7th arrondissement"
+        },
+        {
+          "name": "Boot Café",
+          "description": "Tiny, charming café tucked away in the Marais — excellent flat whites.",
+          "neighborhood": "3rd arrondissement"
+        }
+      ]
+    },
+    {
+      "name": "Restaurants",
+      "spots": [
+        {
+          "name": "Le Bouillon Chartier",
+          "description": "Belle Époque dining hall serving classic French dishes at unbeatable prices.",
+          "neighborhood": "9th arrondissement"
+        },
+        {
+          "name": "Chez Janou",
+          "description": "Provençal bistro famous for its legendary chocolate mousse.",
+          "neighborhood": "3rd arrondissement"
+        },
+        {
+          "name": "Pink Mamma",
+          "description": "Four-story Italian restaurant with rooftop terrace and incredible pasta.",
+          "neighborhood": "10th arrondissement"
+        }
+      ]
+    },
+    {
+      "name": "Bars & Nightlife",
+      "spots": [
+        {
+          "name": "Le Syndicat",
+          "description": "Innovative cocktail bar focusing exclusively on French spirits.",
+          "neighborhood": "10th arrondissement"
+        },
+        {
+          "name": "Candelaria",
+          "description": "Hidden speakeasy behind a taquería — some of the best cocktails in Paris.",
+          "neighborhood": "3rd arrondissement"
+        },
+        {
+          "name": "Le Perchoir Marais",
+          "description": "Rooftop bar with panoramic views and creative cocktails.",
+          "neighborhood": "3rd arrondissement"
+        }
+      ]
+    },
+    {
+      "name": "Hidden Gems",
+      "spots": [
+        {
+          "name": "Rue Crémieux",
+          "description": "A colorful, pastel-painted pedestrian street — Paris's most photogenic block.",
+          "neighborhood": "12th arrondissement"
+        },
+        {
+          "name": "Petite Ceinture",
+          "description": "Abandoned railway turned urban nature trail running through hidden parts of the city.",
+          "neighborhood": "Various"
+        },
+        {
+          "name": "Palais Royal Gardens",
+          "description": "Serene arcaded gardens with Buren's striped columns — a secret oasis.",
+          "neighborhood": "1st arrondissement"
+        }
+      ]
+    }
+  ]
+}

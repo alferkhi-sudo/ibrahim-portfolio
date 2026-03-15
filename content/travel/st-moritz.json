@@ -1,0 +1,86 @@
+{
+  "city": "St. Moritz",
+  "hero_image": "/images/travel/st-moritz-hero.jpg",
+  "categories": [
+    {
+      "name": "Landmarks & Must-See",
+      "spots": [
+        {
+          "name": "Lake St. Moritz",
+          "description": "Pristine alpine lake surrounded by mountains — frozen in winter, emerald in summer.",
+          "neighborhood": "St. Moritz Dorf"
+        },
+        {
+          "name": "Segantini Museum",
+          "description": "Dedicated to Giovanni Segantini's stunning alpine paintings in a domed gallery.",
+          "neighborhood": "St. Moritz Dorf"
+        },
+        {
+          "name": "Muottas Muragl",
+          "description": "Panoramic viewpoint at 2,456m — the best sunset in the Engadin valley.",
+          "neighborhood": "Punt Muragl"
+        }
+      ]
+    },
+    {
+      "name": "Cafés & Coffee",
+      "spots": [
+        {
+          "name": "Hanselmann",
+          "description": "Legendary confectionery and café since 1894 — try the Engadin nut torte.",
+          "neighborhood": "St. Moritz Dorf"
+        },
+        {
+          "name": "Café Hauser",
+          "description": "Cozy alpine café with homemade cakes and sweeping mountain views.",
+          "neighborhood": "St. Moritz Dorf"
+        },
+        {
+          "name": "Badrutt's Palace Lobby Bar",
+          "description": "Glamorous hotel lobby café with impeccable service and alpine elegance.",
+          "neighborhood": "St. Moritz Dorf"
+        }
+      ]
+    },
+    {
+      "name": "Restaurants",
+      "spots": [
+        {
+          "name": "Ecco St. Moritz",
+          "description": "Two Michelin-star dining with creative, ingredient-driven cuisine.",
+          "neighborhood": "St. Moritz Champfèr"
+        },
+        {
+          "name": "Muottas Muragl Panorama Restaurant",
+          "description": "Dining at altitude with unmatched views of the Engadin lakes.",
+          "neighborhood": "Punt Muragl"
+        },
+        {
+          "name": "Chesa Veglia",
+          "description": "Historic farmhouse restaurant within Badrutt's Palace — rustic luxury.",
+          "neighborhood": "St. Moritz Dorf"
+        }
+      ]
+    },
+    {
+      "name": "Hidden Gems",
+      "spots": [
+        {
+          "name": "Bernina Express Route",
+          "description": "UNESCO World Heritage railway through dramatic alpine landscapes.",
+          "neighborhood": "Engadin"
+        },
+        {
+          "name": "Diavolezza Glacier",
+          "description": "Breathtaking glacier terrace — accessible by cable car, otherworldly views.",
+          "neighborhood": "Pontresina"
+        },
+        {
+          "name": "Val Roseg",
+          "description": "Magical valley reachable by horse-drawn carriage or on foot — pure alpine serenity.",
+          "neighborhood": "Pontresina"
+        }
+      ]
+    }
+  ]
+}

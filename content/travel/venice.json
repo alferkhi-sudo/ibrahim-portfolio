@@ -1,0 +1,86 @@
+{
+  "city": "Venice",
+  "hero_image": "/images/travel/venice-hero.jpg",
+  "categories": [
+    {
+      "name": "Landmarks & Must-See",
+      "spots": [
+        {
+          "name": "Piazza San Marco",
+          "description": "The grand square at the heart of Venice — arrive early to beat the crowds.",
+          "neighborhood": "San Marco"
+        },
+        {
+          "name": "Rialto Bridge",
+          "description": "The oldest bridge spanning the Grand Canal, lined with shops and views.",
+          "neighborhood": "San Polo"
+        },
+        {
+          "name": "Doge's Palace",
+          "description": "Gothic masterpiece revealing centuries of Venetian power and artistry.",
+          "neighborhood": "San Marco"
+        }
+      ]
+    },
+    {
+      "name": "Cafés & Coffee",
+      "spots": [
+        {
+          "name": "Caffè Florian",
+          "description": "The oldest café in Italy, serving coffee since 1720 under gilded ceilings.",
+          "neighborhood": "San Marco"
+        },
+        {
+          "name": "Torrefazione Cannaregio",
+          "description": "Local favorite for authentic espresso away from the tourist trail.",
+          "neighborhood": "Cannaregio"
+        },
+        {
+          "name": "Caffè del Doge",
+          "description": "Specialty roaster with a cozy spot near Rialto — try the cold brew.",
+          "neighborhood": "San Polo"
+        }
+      ]
+    },
+    {
+      "name": "Restaurants",
+      "spots": [
+        {
+          "name": "Trattoria alla Madonna",
+          "description": "Classic Venetian seafood restaurant near the Rialto, unchanged for decades.",
+          "neighborhood": "San Polo"
+        },
+        {
+          "name": "Osteria Alle Testiere",
+          "description": "Tiny, intimate restaurant with some of the freshest fish in Venice.",
+          "neighborhood": "Castello"
+        },
+        {
+          "name": "Dal Moro's Fresh Pasta to Go",
+          "description": "Quick, affordable fresh pasta — surprisingly excellent for a takeaway spot.",
+          "neighborhood": "San Marco"
+        }
+      ]
+    },
+    {
+      "name": "Hidden Gems",
+      "spots": [
+        {
+          "name": "Libreria Acqua Alta",
+          "description": "A surreal bookshop where books are stored in bathtubs and gondolas.",
+          "neighborhood": "Castello"
+        },
+        {
+          "name": "Burano Island",
+          "description": "Vibrantly painted fishing village — a photographer's dream just 40 minutes away.",
+          "neighborhood": "Burano"
+        },
+        {
+          "name": "Scala Contarini del Bovolo",
+          "description": "Hidden Renaissance spiral staircase with a stunning rooftop view.",
+          "neighborhood": "San Marco"
+        }
+      ]
+    }
+  ]
+}

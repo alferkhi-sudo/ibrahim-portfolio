@@ -1,0 +1,86 @@
+{
+  "city": "Milano",
+  "hero_image": "/images/travel/milano-hero.jpg",
+  "categories": [
+    {
+      "name": "Landmarks & Must-See",
+      "spots": [
+        {
+          "name": "Duomo di Milano",
+          "description": "The magnificent Gothic cathedral — climb to the rooftop for panoramic views.",
+          "neighborhood": "Centro Storico"
+        },
+        {
+          "name": "Galleria Vittorio Emanuele II",
+          "description": "Italy's oldest shopping gallery with breathtaking glass and iron architecture.",
+          "neighborhood": "Centro Storico"
+        },
+        {
+          "name": "Navigli District",
+          "description": "Canal-side neighborhood with art studios, boutiques, and aperitivo bars.",
+          "neighborhood": "Navigli"
+        }
+      ]
+    },
+    {
+      "name": "Cafés & Coffee",
+      "spots": [
+        {
+          "name": "Pavé",
+          "description": "Artisan bakery and café with some of Milan's best pastries and brunch.",
+          "neighborhood": "Porta Venezia"
+        },
+        {
+          "name": "Orsonero Coffee",
+          "description": "Specialty coffee roaster with minimalist Milanese design sensibility.",
+          "neighborhood": "Porta Venezia"
+        },
+        {
+          "name": "Marchesi 1824",
+          "description": "Prada-owned historic pastry shop — elegant interiors and exquisite pastries.",
+          "neighborhood": "Centro Storico"
+        }
+      ]
+    },
+    {
+      "name": "Restaurants",
+      "spots": [
+        {
+          "name": "Trattoria Milanese",
+          "description": "Classic Milanese cuisine since 1933 — the risotto alla milanese is legendary.",
+          "neighborhood": "Centro Storico"
+        },
+        {
+          "name": "Pescaria",
+          "description": "Fresh, fast seafood in a modern setting — the tuna burger is a must.",
+          "neighborhood": "Navigli"
+        },
+        {
+          "name": "Dry Milano",
+          "description": "Craft cocktails and gourmet pizza in a sleek, trendy atmosphere.",
+          "neighborhood": "Brera"
+        }
+      ]
+    },
+    {
+      "name": "Hidden Gems",
+      "spots": [
+        {
+          "name": "Fondazione Prada",
+          "description": "Contemporary art space in a reimagined distillery — architecture by OMA.",
+          "neighborhood": "Largo Isarco"
+        },
+        {
+          "name": "Bosco Verticale",
+          "description": "Award-winning vertical forest towers — a living masterpiece of green architecture.",
+          "neighborhood": "Porta Nuova"
+        },
+        {
+          "name": "Cimitero Monumentale",
+          "description": "Open-air museum of sculptures and monuments — hauntingly beautiful.",
+          "neighborhood": "Porta Garibaldi"
+        }
+      ]
+    }
+  ]
+}
