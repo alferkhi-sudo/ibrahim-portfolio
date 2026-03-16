@@ -60,10 +60,10 @@ export default async function MovieReviewPage({
       </section>
 
       {/* Content */}
-      <section className="max-w-[680px] mx-auto px-5 md:px-6 -mt-12 md:-mt-20 relative z-10 pb-16 md:pb-24">
+      <section className="bg-[var(--bg)] max-w-[680px] mx-auto px-5 md:px-6 -mt-12 md:-mt-20 relative z-10 pb-16 md:pb-24">
         <Link
           href={`/${locale}/movies`}
-          className="inline-flex items-center gap-2 text-sm text-[#888888] hover:text-white transition-colors mb-6 md:mb-8 py-1"
+          className="inline-flex items-center gap-2 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors mb-6 md:mb-8 py-1"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -74,7 +74,7 @@ export default async function MovieReviewPage({
         <SectionReveal>
           <h1
             style={{ fontSize: "clamp(1.75rem, 5vw, 3.5rem)" }}
-            className="font-bold text-white tracking-tight"
+            className="font-bold text-[var(--fg)] tracking-tight"
           >
             {frontmatter.title}
           </h1>
@@ -83,15 +83,15 @@ export default async function MovieReviewPage({
         {/* Meta info */}
         <SectionReveal delay={0.1}>
           <div className="mt-3 md:mt-4 flex flex-wrap items-center gap-3 md:gap-4">
-            <span className="text-[#888888] text-sm md:text-base">{frontmatter.year}</span>
-            <span className="text-[#888888] text-sm md:text-base">
+            <span className="text-[var(--fg-muted)] text-sm md:text-base">{frontmatter.year}</span>
+            <span className="text-[var(--fg-muted)] text-sm md:text-base">
               {t("directedBy")} {frontmatter.director}
             </span>
             <div className="flex flex-wrap gap-2">
               {frontmatter.genre.map((g) => (
                 <span
                   key={g}
-                  className="text-xs font-medium text-[#888888] bg-[#1a1a1a] px-2.5 py-1 rounded-full"
+                  className="text-xs font-medium text-[var(--fg-muted)] bg-[var(--bg-card)] px-2.5 py-1 rounded-full"
                 >
                   {g}
                 </span>
@@ -106,7 +106,7 @@ export default async function MovieReviewPage({
             <span className="text-4xl md:text-5xl font-bold text-accent">
               {frontmatter.rating}
             </span>
-            <span className="text-xl md:text-2xl text-[#888888]">/10</span>
+            <span className="text-xl md:text-2xl text-[var(--fg-muted)]">/10</span>
           </div>
         </SectionReveal>
 
@@ -116,7 +116,7 @@ export default async function MovieReviewPage({
             {paragraphs.map((paragraph, i) => (
               <p
                 key={i}
-                className="text-base md:text-lg text-body leading-relaxed"
+                className="text-base md:text-lg text-[var(--fg-muted)] leading-relaxed"
               >
                 {paragraph.trim()}
               </p>
@@ -126,9 +126,9 @@ export default async function MovieReviewPage({
 
         {/* Related Reviews */}
         {relatedMovies.length > 0 && (
-          <div className="mt-16 md:mt-24 pt-8 md:pt-12 border-t border-white/10">
+          <div className="mt-16 md:mt-24 pt-8 md:pt-12 border-t border-[var(--border)]">
             <SectionReveal>
-              <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-6 md:mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-[var(--fg)] tracking-tight mb-6 md:mb-8">
                 {t("youMightAlsoLike")}
               </h2>
             </SectionReveal>
