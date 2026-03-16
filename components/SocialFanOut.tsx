@@ -1,9 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { cloudinary } from "@/lib/cloudinary";
+
+/* Tiny dark placeholder shown while each card image loads */
+const BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMWExYTFhIi8+PC9zdmc+";
 
 /* ─── Card data (with real images) ─── */
 const CARDS = [
@@ -215,7 +220,7 @@ export default function SocialFanOut() {
                       }
                     : { x: 0, y: 0, rotate: 0, scale: 0.8, opacity: 0 }
                 }
-                initial={{ x: 0, y: 0, rotate: 0, scale: 0.8, opacity: 0 }}
+                initial={false}
                 transition={{
                   x:       { duration: ready ? 0.28 : 0.65, delay, ease: [0.22, 1, 0.36, 1] },
                   y:       { duration: 0.28, ease: "easeOut" },
@@ -235,11 +240,15 @@ export default function SocialFanOut() {
                     transition:  "box-shadow 0.3s ease",
                   }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={card.image}
                     alt={card.label}
-                    className="w-full h-full object-cover"
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 150px, 200px"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                    className="object-cover"
                   />
                 </div>
               </motion.div>
