@@ -57,7 +57,7 @@ export default function MoviesClient({ movies: _, locale }: MoviesClientProps) {
             Cinema / Film Diary
           </span>
           <a
-            href="https://letterboxd.com/ibrahim"
+            href="https://letterboxd.com/ibra14"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[10px] md:text-xs uppercase tracking-widest text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300 font-mono"
@@ -177,7 +177,7 @@ export default function MoviesClient({ movies: _, locale }: MoviesClientProps) {
           <SectionReveal delay={0.5}>
             <div className="text-center mt-12 md:mt-16">
               <a
-                href="https://letterboxd.com"
+                href="https://letterboxd.com/ibra14"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300 font-medium py-2"
