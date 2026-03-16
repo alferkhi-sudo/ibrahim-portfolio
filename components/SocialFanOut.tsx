@@ -7,11 +7,6 @@ import { useTranslations } from "next-intl";
 /* ─── Card data (with real images) ─── */
 const CARDS = [
   {
-    id: 0,
-    image: "/images/home/social-1.jpg",
-    label: "PARIS",
-  },
-  {
     id: 1,
     image: "/images/home/social-2.jpg",
     label: "VENICE",
@@ -25,6 +20,11 @@ const CARDS = [
     id: 3,
     image: "/images/home/social-4.jpg",
     label: "PORTRAIT",
+  },
+  {
+    id: 0,
+    image: "/images/home/social-1.jpg",
+    label: "PARIS",
   },
   {
     id: 4,
@@ -186,6 +186,7 @@ export default function SocialFanOut() {
             const pushX    = ready ? getPush(i, hovered) : 0;
             const isHov    = hovered === i;
             const zIdx     = isHov ? 50 : cfg.zBase[i];
+            const isCenter = i === 3;
 
             /* Fan-out delay only on the initial entrance animation */
             const delay    = ready ? 0 : i * 0.065;
@@ -240,11 +241,13 @@ export default function SocialFanOut() {
                     alt={card.label}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 flex items-end p-3 md:p-4 bg-gradient-to-t from-black/40 to-transparent">
-                    <span className="text-white/40 text-[8px] md:text-[9px] uppercase tracking-[0.3em] font-medium select-none">
-                      {card.label}
-                    </span>
-                  </div>
+                  {!isCenter && (
+                    <div className="absolute inset-0 flex items-end p-3 md:p-4 bg-gradient-to-t from-black/40 to-transparent">
+                      <span className="text-white/40 text-[8px] md:text-[9px] uppercase tracking-[0.3em] font-medium select-none">
+                        {card.label}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             );
