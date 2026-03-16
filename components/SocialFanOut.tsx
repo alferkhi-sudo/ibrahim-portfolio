@@ -14,8 +14,8 @@ const BLUR_DATA_URL =
 const CARDS = [
   {
     id: 0,
-    image: cloudinary("images/home/social-2"),
-    label: "VENICE",
+    image: cloudinary("images/home/social-4"),
+    label: "PORTRAIT",
   },
   {
     id: 1,
@@ -24,8 +24,8 @@ const CARDS = [
   },
   {
     id: 2,
-    image: cloudinary("images/home/social-4"),
-    label: "PORTRAIT",
+    image: cloudinary("images/home/social-5"),
+    label: "MIDNIGHT",
   },
   {
     id: 3,
@@ -44,8 +44,8 @@ const CARDS = [
   },
   {
     id: 6,
-    image: cloudinary("images/home/social-5"),
-    label: "MIDNIGHT",
+    image: cloudinary("images/home/social-2"),
+    label: "VENICE",
   },
 ];
 
