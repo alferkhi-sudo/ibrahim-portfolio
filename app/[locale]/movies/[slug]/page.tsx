@@ -51,10 +51,11 @@ export default async function MovieReviewPage({
     <>
       {/* Hero */}
       <section className="relative h-[40vh] md:h-[60vh] flex items-end overflow-hidden">
-        <div className="absolute inset-0 placeholder-image">
-          <span className="text-lg">{frontmatter.title}</span>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-105 blur-sm"
+          style={{ backgroundImage: `url(${frontmatter.poster})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-[#0a0a0a]/20" />
       </section>
 
       {/* Content */}

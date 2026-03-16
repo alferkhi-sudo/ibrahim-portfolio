@@ -134,7 +134,7 @@ export default function MoviesClient({ movies: _, locale }: MoviesClientProps) {
             </h2>
           </SectionReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16 md:mb-24">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-24">
             {FEATURED_REVIEWS.map((movie, i) => (
               <SectionReveal key={movie.slug} delay={i * 0.15}>
                 <ReviewCard
