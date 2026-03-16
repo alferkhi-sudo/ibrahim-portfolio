@@ -6,7 +6,6 @@ import { useParams } from "next/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import SectionReveal from "@/components/SectionReveal";
-import ScrollIndicator from "@/components/ScrollIndicator";
 
 const cities = [
   { slug: "paris", name: "Paris" },

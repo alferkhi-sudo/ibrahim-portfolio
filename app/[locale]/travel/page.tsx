@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
-import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function TravelPage() {
   const t = useTranslations("travel");

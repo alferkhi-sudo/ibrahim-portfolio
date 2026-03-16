@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import SectionReveal from "@/components/SectionReveal";
 import ReviewCard from "@/components/ReviewCard";
-import ScrollIndicator from "@/components/ScrollIndicator";
 import type { MovieFrontmatter } from "@/lib/mdx";
 
 interface MoviesClientProps {
