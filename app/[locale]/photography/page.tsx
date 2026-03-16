@@ -84,44 +84,53 @@ export default function PhotographyPage() {
 
   return (
     <>
-      <section className="relative h-[70vh] md:h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 placeholder-image" />
-        <div className="absolute inset-0 bg-[#0a0a0a]/50" />
-        <div className="relative z-10 text-center px-5 md:px-6">
+      <section className="flex flex-col px-5 md:px-10 lg:px-6 pt-28 md:pt-36 pb-10 md:pb-16 gap-12 md:gap-0 md:min-h-[85vh] md:justify-between">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="flex items-start justify-between"
+        >
+          <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-[var(--fg-muted)] font-mono">
+            01 — Visual Archive
+          </span>
+          <Link
+            href="https://instagram.com/framebyibrahim"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] md:text-xs uppercase tracking-widest text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300"
+          >
+            @framebyibrahim ↗
+          </Link>
+        </motion.div>
+
+        <div>
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}
-            className="font-bold text-white tracking-tight"
+            transition={{ duration: 1, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{ fontSize: "clamp(4rem, 17vw, 15rem)" }}
+            className="font-bold tracking-tighter leading-[0.88] text-[var(--fg)]"
           >
-            {t("title")}
+            Photo-<br />graphy
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-4 md:mt-6 text-base md:text-lg text-white/60 font-light max-w-md mx-auto"
-          >
-            {t("tagline")}
-          </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-8 md:mt-10"
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="mt-8 md:mt-12 flex flex-col md:flex-row md:items-end md:justify-between gap-5"
           >
-            <Link
-              href="https://instagram.com/framebyibrahim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-xs md:text-sm uppercase tracking-widest text-white/70 hover:text-white transition-colors duration-300 border-b border-white/70 hover:border-white pb-1"
-            >
-              Instagram
-            </Link>
+            <p className="text-base md:text-lg text-[var(--fg-muted)] font-light italic max-w-xs">
+              &ldquo;{t("tagline")}&rdquo;
+            </p>
+            <div className="flex gap-5 text-[10px] uppercase tracking-[0.25em] text-[var(--fg-muted)] font-mono">
+              {cities.map((c, i) => (
+                <span key={c.slug}>{String(i + 1).padStart(2, "0")} {c.name}</span>
+              ))}
+            </div>
           </motion.div>
         </div>
-        <ScrollIndicator />
       </section>
 
       {cities.map((city) => (

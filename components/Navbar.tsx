@@ -160,14 +160,8 @@ export default function Navbar({ locale }: NavbarProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-40 bg-[var(--bg)]/95 backdrop-blur-2xl lg:hidden"
+            className="fixed inset-0 z-40 bg-[var(--bg)] lg:hidden"
           >
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-[15%] right-[10%] w-32 h-40 rounded-lg placeholder-image opacity-[0.06] rotate-6" />
-              <div className="absolute bottom-[25%] left-[8%] w-28 h-36 rounded-lg placeholder-image opacity-[0.05] -rotate-3" />
-              <div className="absolute top-[55%] right-[25%] w-24 h-32 rounded-lg placeholder-image opacity-[0.04] rotate-12" />
-            </div>
-
             <div className="flex flex-col items-center justify-center h-full gap-6 md:gap-8">
               {navLinks.map((link, i) => (
                 <motion.div
