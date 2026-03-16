@@ -39,13 +39,13 @@ const CARDS = [
   },
   {
     id: 5,
-    image: cloudinary("images/home/social-5"),
-    label: "MIDNIGHT",
+    image: cloudinary("images/home/social-6"),
+    label: "VENEZIA",
   },
   {
     id: 6,
-    image: cloudinary("images/home/social-6"),
-    label: "VENEZIA",
+    image: cloudinary("images/home/social-5"),
+    label: "MIDNIGHT",
   },
 ];
 
