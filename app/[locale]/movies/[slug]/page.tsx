@@ -56,11 +56,11 @@ export default async function MovieReviewPage({
           className="absolute inset-0 bg-cover bg-center scale-105 blur-sm"
           style={{ backgroundImage: `url(${frontmatter.poster})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-[#0a0a0a]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/60 to-[var(--bg)]/20" />
       </section>
 
       {/* Content */}
-      <section className="bg-[var(--bg)] max-w-[680px] mx-auto px-5 md:px-6 -mt-12 md:-mt-20 relative z-10 pb-16 md:pb-24">
+      <section className="max-w-[680px] mx-auto px-5 md:px-6 -mt-12 md:-mt-20 relative z-10 pb-16 md:pb-24">
         <Link
           href={`/${locale}/movies`}
           className="inline-flex items-center gap-2 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors mb-6 md:mb-8 py-1"
