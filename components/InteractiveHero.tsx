@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import BackgroundShapes from "./BackgroundShapes";
+import { cloudinary } from "@/lib/cloudinary";
 
 export default function InteractiveHero() {
   const grainRef            = useRef<SVGFETurbulenceElement>(null);
@@ -47,7 +48,7 @@ export default function InteractiveHero() {
       <div className="absolute inset-0 flex items-end justify-center pb-8 md:pb-12">
         <div className="relative w-[88vw] md:w-[85vw] max-w-[1000px] h-[79vw] md:h-[80vh] overflow-hidden">
           <Image
-            src="/images/hero/Portrait.png"
+            src={cloudinary("images/hero/Portrait")}
             alt="Ibrahim"
             fill
             className="object-contain object-center md:object-bottom"
@@ -76,7 +77,7 @@ export default function InteractiveHero() {
       >
         <div className="relative w-[88vw] md:w-[85vw] max-w-[1000px] h-[79vw] md:h-[80vh] overflow-hidden">
           <Image
-            src="/images/hero/Portrait-variant.png"
+            src={cloudinary("images/hero/Portrait-variant")}
             alt="Ibrahim"
             fill
             className="object-contain object-center md:object-bottom"

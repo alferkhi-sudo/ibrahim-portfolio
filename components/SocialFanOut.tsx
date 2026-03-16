@@ -3,42 +3,43 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { cloudinary } from "@/lib/cloudinary";
 
 /* ─── Card data (with real images) ─── */
 const CARDS = [
   {
     id: 0,
-    image: "/images/home/social-2.jpg",
+    image: cloudinary("images/home/social-2"),
     label: "VENICE",
   },
   {
     id: 1,
-    image: "/images/home/social-3.jpg",
+    image: cloudinary("images/home/social-3"),
     label: "LA HAINE",
   },
   {
     id: 2,
-    image: "/images/home/social-4.jpg",
+    image: cloudinary("images/home/social-4"),
     label: "PORTRAIT",
   },
   {
     id: 3,
-    image: "/images/home/social-0.jpg",
+    image: cloudinary("images/home/social-0"),
     label: "PARIS",
   },
   {
     id: 4,
-    image: "/images/home/social-1.jpg",
+    image: cloudinary("images/home/social-1"),
     label: "ST. MORITZ",
   },
   {
     id: 5,
-    image: "/images/home/social-5.jpg",
+    image: cloudinary("images/home/social-5"),
     label: "MIDNIGHT",
   },
   {
     id: 6,
-    image: "/images/home/social-6.jpg",
+    image: cloudinary("images/home/social-6"),
     label: "VENEZIA",
   },
 ];

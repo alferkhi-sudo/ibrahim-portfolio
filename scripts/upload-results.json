@@ -1,0 +1,107 @@
+[
+  {
+    "localPath": "/images/hero/Portrait-variant.png",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699358/images/hero/Portrait-variant.png",
+    "publicId": "images/hero/Portrait-variant"
+  },
+  {
+    "localPath": "/images/hero/Portrait.png",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699359/images/hero/Portrait.png",
+    "publicId": "images/hero/Portrait"
+  },
+  {
+    "localPath": "/images/hero/photography-hero.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699360/images/hero/photography-hero.png",
+    "publicId": "images/hero/photography-hero"
+  },
+  {
+    "localPath": "/images/hero/videography-hero.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699361/images/hero/videography-hero.png",
+    "publicId": "images/hero/videography-hero"
+  },
+  {
+    "localPath": "/images/home/cinema-main.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699363/images/home/cinema-main.jpg",
+    "publicId": "images/home/cinema-main"
+  },
+  {
+    "localPath": "/images/home/cinema-review.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699364/images/home/cinema-review.jpg",
+    "publicId": "images/home/cinema-review"
+  },
+  {
+    "localPath": "/images/home/photography-como.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699365/images/home/photography-como.jpg",
+    "publicId": "images/home/photography-como"
+  },
+  {
+    "localPath": "/images/home/photography-main.JPG",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699366/images/home/photography-main.jpg",
+    "publicId": "images/home/photography-main"
+  },
+  {
+    "localPath": "/images/home/photography-venice.JPG",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699367/images/home/photography-venice.jpg",
+    "publicId": "images/home/photography-venice"
+  },
+  {
+    "localPath": "/images/home/social-0.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699368/images/home/social-0.jpg",
+    "publicId": "images/home/social-0"
+  },
+  {
+    "localPath": "/images/home/social-1.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699369/images/home/social-1.jpg",
+    "publicId": "images/home/social-1"
+  },
+  {
+    "localPath": "/images/home/social-2.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699371/images/home/social-2.jpg",
+    "publicId": "images/home/social-2"
+  },
+  {
+    "localPath": "/images/home/social-3.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699372/images/home/social-3.jpg",
+    "publicId": "images/home/social-3"
+  },
+  {
+    "localPath": "/images/home/social-4.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699373/images/home/social-4.jpg",
+    "publicId": "images/home/social-4"
+  },
+  {
+    "localPath": "/images/home/social-5.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699376/images/home/social-5.jpg",
+    "publicId": "images/home/social-5"
+  },
+  {
+    "localPath": "/images/home/social-6.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699379/images/home/social-6.jpg",
+    "publicId": "images/home/social-6"
+  },
+  {
+    "localPath": "/images/home/travel-city.JPG",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699381/images/home/travel-city.jpg",
+    "publicId": "images/home/travel-city"
+  },
+  {
+    "localPath": "/images/home/travel-main.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699382/images/home/travel-main.jpg",
+    "publicId": "images/home/travel-main"
+  },
+  {
+    "localPath": "/images/home/travel-map.JPG",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699384/images/home/travel-map.jpg",
+    "publicId": "images/home/travel-map"
+  },
+  {
+    "localPath": "/images/movies/500-days-of-summer.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699385/images/movies/500-days-of-summer.jpg",
+    "publicId": "images/movies/500-days-of-summer"
+  },
+  {
+    "localPath": "/images/movies/romeria.jpg",
+    "cloudinaryUrl": "https://res.cloudinary.com/dp9qddanj/image/upload/v1773699386/images/movies/romeria.jpg",
+    "publicId": "images/movies/romeria"
+  }
+]

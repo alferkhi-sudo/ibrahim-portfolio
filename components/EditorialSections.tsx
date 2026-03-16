@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import { cloudinary } from "@/lib/cloudinary";
 
 /* ─── Gradient or Image ─── */
 function GradImg({
@@ -300,17 +301,17 @@ export default function EditorialSections() {
       ctaLabel: t("photoCtaLabel"),
       ctaHref: "/photography",
       reversed: false,
-      mainImage: "/images/home/photography-main.JPG",
+      mainImage: cloudinary("images/home/photography-main"),
       smallImgs: [
         {
-          image: "/images/home/photography-venice.JPG",
+          image: cloudinary("images/home/photography-venice"),
           label: "Venice",
           rotation: -3,
           top: "-10%",
           right: "-8%",
         },
         {
-          image: "/images/home/photography-como.jpg",
+          image: cloudinary("images/home/photography-como"),
           label: "Como",
           rotation: 4,
           bottom: "-8%",
@@ -328,10 +329,10 @@ export default function EditorialSections() {
       ctaLabel: t("cinemaCtaLabel"),
       ctaHref: "/movies",
       reversed: true,
-      mainImage: "/images/home/cinema-main.jpg",
+      mainImage: cloudinary("images/home/cinema-main"),
       smallImgs: [
         {
-          image: "/images/home/cinema-review.jpg",
+          image: cloudinary("images/home/cinema-review"),
           label: "Review",
           rotation: -5,
           bottom: "-8%",
@@ -349,17 +350,17 @@ export default function EditorialSections() {
       ctaLabel: t("travelCtaLabel"),
       ctaHref: "/travel",
       reversed: false,
-      mainImage: "/images/home/travel-main.jpg",
+      mainImage: cloudinary("images/home/travel-main"),
       smallImgs: [
         {
-          image: "/images/home/travel-city.JPG",
+          image: cloudinary("images/home/travel-city"),
           label: "City",
           rotation: -4,
           top: "-10%",
           right: "-8%",
         },
         {
-          image: "/images/home/travel-map.JPG",
+          image: cloudinary("images/home/travel-map"),
           label: "Map",
           rotation: 3,
           bottom: "-8%",

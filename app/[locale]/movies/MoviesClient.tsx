@@ -6,6 +6,7 @@ import { useRef } from "react";
 import SectionReveal from "@/components/SectionReveal";
 import ReviewCard from "@/components/ReviewCard";
 import type { MovieFrontmatter } from "@/lib/mdx";
+import { cloudinary } from "@/lib/cloudinary";
 
 interface MoviesClientProps {
   movies: MovieFrontmatter[];
@@ -18,7 +19,7 @@ const FEATURED_REVIEWS = [
     year: 2025,
     rating: 8,
     excerpt: "A poignant and quietly devastating coming of age story that lingers long after the credits roll. Director Carla Simón crafts a film of deep emotional intelligence.",
-    poster: "/images/movies/romeria.jpg",
+    poster: cloudinary("images/movies/romeria"),
     slug: "romeria",
   },
   {
@@ -26,7 +27,7 @@ const FEATURED_REVIEWS = [
     year: 2009,
     rating: 9,
     excerpt: "A raw, unfiltered depiction of love, expectation, and self-deception. The film explores how people act according to their true intentions, not their words.",
-    poster: "/images/movies/500-days-of-summer.jpg",
+    poster: cloudinary("images/movies/500-days-of-summer"),
     slug: "500-days-of-summer",
   },
 ];
