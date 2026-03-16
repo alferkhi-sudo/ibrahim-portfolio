@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
 
@@ -42,7 +41,6 @@ function CitySection({
 
 export default function PhotographyPage() {
   const t = useTranslations("photography");
-  const { locale } = useParams();
 
   return (
     <>
