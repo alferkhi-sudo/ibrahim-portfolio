@@ -4,41 +4,41 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-/* ─── Card data (placeholder gradients — swap with real images later) ─── */
+/* ─── Card data (with real images) ─── */
 const CARDS = [
   {
     id: 0,
-    gradient: "linear-gradient(160deg,#e8c4a0 0%,#d4a07a 60%,#c08060 100%)",
+    image: "/images/home/social-1.jpg",
     label: "PARIS",
   },
   {
     id: 1,
-    gradient: "linear-gradient(160deg,#4a9ead 0%,#2d7a8a 55%,#1a5a6a 100%)",
+    image: "/images/home/social-2.jpg",
     label: "VENICE",
   },
   {
     id: 2,
-    gradient: "linear-gradient(160deg,#1a1a2e 0%,#2d1040 50%,#e94560 100%)",
+    image: "/images/home/social-3.jpg",
     label: "LA HAINE",
   },
   {
     id: 3,
-    gradient: "linear-gradient(160deg,#c8a97e 0%,#a88060 55%,#886040 100%)",
+    image: "/images/home/social-4.jpg",
     label: "PORTRAIT",
   },
   {
     id: 4,
-    gradient: "linear-gradient(160deg,#d8eaf7 0%,#a0c4e8 55%,#6090c0 100%)",
+    image: "/images/home/social-5.jpg",
     label: "ST. MORITZ",
   },
   {
     id: 5,
-    gradient: "linear-gradient(160deg,#0f0f1a 0%,#1a1a3a 55%,#2a2a5a 100%)",
+    image: "/images/home/social-6.jpg",
     label: "MIDNIGHT",
   },
   {
     id: 6,
-    gradient: "linear-gradient(160deg,#f7a072 0%,#e07050 55%,#c05030 100%)",
+    image: "/images/home/social-1.jpg",
     label: "VENEZIA",
   },
 ];
@@ -226,17 +226,22 @@ export default function SocialFanOut() {
                 onHoverEnd={()  => setHovered(null)}
               >
                 <div
-                  className="w-full h-full rounded-[18px] overflow-hidden"
+                  className="relative w-full h-full rounded-[18px] overflow-hidden"
                   style={{
-                    background:  card.gradient,
                     boxShadow:   isHov
                       ? "0 24px 64px rgba(0,0,0,0.22), 0 8px 20px rgba(0,0,0,0.14)"
                       : "0 8px 28px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.08)",
                     transition:  "box-shadow 0.3s ease",
                   }}
                 >
-                  <div className="w-full h-full flex items-end p-3 md:p-4">
-                    <span className="text-white/25 text-[8px] md:text-[9px] uppercase tracking-[0.3em] font-medium select-none">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={card.image}
+                    alt={card.label}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-end p-3 md:p-4 bg-gradient-to-t from-black/40 to-transparent">
+                    <span className="text-white/40 text-[8px] md:text-[9px] uppercase tracking-[0.3em] font-medium select-none">
                       {card.label}
                     </span>
                   </div>

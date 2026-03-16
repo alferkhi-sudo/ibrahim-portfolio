@@ -300,21 +300,18 @@ export default function EditorialSections() {
       ctaLabel: t("photoCtaLabel"),
       ctaHref: "/photography",
       reversed: false,
-      mainGradient:
-        "linear-gradient(160deg,#e8a87c 0%,#c8704a 55%,#a84e2e 100%)",
+      mainImage: "/images/home/photography-main.JPG",
       smallImgs: [
         {
-          gradient:
-            "linear-gradient(145deg,#f5c8a0 0%,#e89870 100%)",
+          image: "/images/home/photography-venice.JPG",
           label: "Venice",
           rotation: -3,
           top: "-10%",
           right: "-8%",
         },
         {
-          gradient:
-            "linear-gradient(145deg,#c87850 0%,#a86030 100%)",
-          label: "Milano",
+          image: "/images/home/photography-como.jpg",
+          label: "Como",
           rotation: 4,
           bottom: "-8%",
           right: "-5%",
@@ -352,20 +349,17 @@ export default function EditorialSections() {
       ctaLabel: t("travelCtaLabel"),
       ctaHref: "/travel",
       reversed: false,
-      mainGradient:
-        "linear-gradient(160deg,#3a7bd5 0%,#2a5faa 50%,#1a4880 100%)",
+      mainImage: "/images/home/travel-main.jpg",
       smallImgs: [
         {
-          gradient:
-            "linear-gradient(145deg,#5a9eea 0%,#3a7bd5 100%)",
+          image: "/images/home/travel-city.JPG",
           label: "City",
           rotation: -4,
           top: "-10%",
           right: "-8%",
         },
         {
-          gradient:
-            "linear-gradient(145deg,#2a6bbf 0%,#1a4e8f 100%)",
+          image: "/images/home/travel-map.JPG",
           label: "Map",
           rotation: 3,
           bottom: "-8%",
