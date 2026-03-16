@@ -5,9 +5,12 @@ import { getCityBySlug, cities as allCities } from "@/data/photography";
 import { notFound } from "next/navigation";
 import ImageGallery from "@/components/ImageGallery";
 import SectionReveal from "@/components/SectionReveal";
+import { locales } from "@/i18n/request";
 
 export function generateStaticParams() {
-  return allCities.map((city) => ({ city: city.slug }));
+  return locales.flatMap((locale) =>
+    allCities.map((city) => ({ locale, city: city.slug }))
+  );
 }
 
 export async function generateMetadata({

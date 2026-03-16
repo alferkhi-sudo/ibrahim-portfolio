@@ -5,12 +5,13 @@ import { notFound } from "next/navigation";
 import { getMovieBySlug, getAllMovieSlugs, getAllMovies } from "@/lib/mdx";
 import SectionReveal from "@/components/SectionReveal";
 import ReviewCard from "@/components/ReviewCard";
+import { locales } from "@/i18n/request";
 
 const FEATURED_SLUGS = ["romeria", "500-days-of-summer"];
 
 export function generateStaticParams() {
   const slugs = getAllMovieSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
 export async function generateMetadata({
