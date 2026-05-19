@@ -11,9 +11,8 @@ type Answers = Record<string, string | string[]>;
 // ─── Reusable field components ───────────────────────────────────────────────
 
 function Radio({
-  name, options, value, onChange,
+  options, value, onChange,
 }: {
-  name: string;
   options: string[];
   value: string;
   onChange: (v: string) => void;
@@ -23,6 +22,7 @@ function Radio({
       {options.map((opt) => (
         <label
           key={opt}
+          onClick={() => onChange(opt)}
           className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-150 text-sm
             ${value === opt
               ? "border-[#C17B3A] bg-[#C17B3A]/8 text-[#7a4a1e] font-medium"
@@ -45,15 +45,14 @@ function Radio({
 }
 
 function Checkbox({
-  name, options, value, onChange, max,
+  options, value, onChange, max,
 }: {
-  name: string;
   options: string[];
   value: string[];
   onChange: (v: string[]) => void;
   max?: number;
 }) {
-  const toggle = (opt: string) => {
+  const handleToggle = (opt: string) => {
     if (value.includes(opt)) {
       onChange(value.filter((v) => v !== opt));
     } else if (!max || value.length < max) {
@@ -72,6 +71,7 @@ function Checkbox({
         return (
           <label
             key={opt}
+            onClick={() => !disabled && handleToggle(opt)}
             className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-150 text-sm
               ${checked
                 ? "border-[#C17B3A] bg-[#C17B3A]/8 text-[#7a4a1e] font-medium"
@@ -154,22 +154,22 @@ function Step1({ answers, set }: { answers: Answers; set: (k: string, v: string 
   return (
     <>
       <Question num={1} label="Tranche d'âge">
-        <Radio name="q1" options={["18–24", "25–34", "35–49", "50–64", "65+"]} value={answers.q1 as string ?? ""} onChange={(v) => set("q1", v)} />
+        <Radio options={["18–24", "25–34", "35–49", "50–64", "65+"]} value={answers.q1 as string ?? ""} onChange={(v) => set("q1", v)} />
       </Question>
       <Question num={2} label="Situation professionnelle">
-        <Radio name="q2" options={["Salarié cadre", "Salarié non-cadre", "Étudiant", "Indépendant", "Retraité", "Autre"]} value={answers.q2 as string ?? ""} onChange={(v) => set("q2", v)} />
+        <Radio options={["Salarié cadre", "Salarié non-cadre", "Étudiant", "Indépendant", "Retraité", "Autre"]} value={answers.q2 as string ?? ""} onChange={(v) => set("q2", v)} />
       </Question>
       <Question num={3} label="Ville ou commune">
         <TextInput name="q3" value={answers.q3 as string ?? ""} onChange={(v) => set("q3", v)} placeholder="Ex. Rouen, Le Havre..." />
       </Question>
       <Question num={4} label="Revenu mensuel net du foyer">
-        <Radio name="q4" options={["Moins de 1 500 €", "1 500–3 000 €", "3 000–5 000 €", "Plus de 5 000 €", "Préfère ne pas répondre"]} value={answers.q4 as string ?? ""} onChange={(v) => set("q4", v)} />
+        <Radio options={["Moins de 1 500 €", "1 500–3 000 €", "3 000–5 000 €", "Plus de 5 000 €", "Préfère ne pas répondre"]} value={answers.q4 as string ?? ""} onChange={(v) => set("q4", v)} />
       </Question>
       <Question num={5} label="Niveau d'études">
-        <Radio name="q5" options={["Bac ou moins", "Bac+2", "Bac+3–4", "Bac+5 et plus"]} value={answers.q5 as string ?? ""} onChange={(v) => set("q5", v)} />
+        <Radio options={["Bac ou moins", "Bac+2", "Bac+3–4", "Bac+5 et plus"]} value={answers.q5 as string ?? ""} onChange={(v) => set("q5", v)} />
       </Question>
       <Question num={6} label="Composition du foyer">
-        <Radio name="q6" options={["Seul", "En couple sans enfant", "En couple avec enfant(s)", "Famille monoparentale", "Autre"]} value={answers.q6 as string ?? ""} onChange={(v) => set("q6", v)} />
+        <Radio options={["Seul", "En couple sans enfant", "En couple avec enfant(s)", "Famille monoparentale", "Autre"]} value={answers.q6 as string ?? ""} onChange={(v) => set("q6", v)} />
       </Question>
     </>
   );
@@ -179,25 +179,25 @@ function Step2({ answers, set }: { answers: Answers; set: (k: string, v: string 
   return (
     <>
       <Question num={7} label="À quelle fréquence allez-vous au restaurant ?">
-        <Radio name="q7" options={["Moins d'une fois par mois", "1 fois par mois", "2–3 fois par mois", "1 fois par semaine", "Plusieurs fois par semaine"]} value={answers.q7 as string ?? ""} onChange={(v) => set("q7", v)} />
+        <Radio options={["Moins d'une fois par mois", "1 fois par mois", "2–3 fois par mois", "1 fois par semaine", "Plusieurs fois par semaine"]} value={answers.q7 as string ?? ""} onChange={(v) => set("q7", v)} />
       </Question>
       <Question num={8} label="Budget moyen par couvert (hors boissons)">
-        <Radio name="q8" options={["Moins de 12 €", "12–20 €", "20–30 €", "Plus de 30 €"]} value={answers.q8 as string ?? ""} onChange={(v) => set("q8", v)} />
+        <Radio options={["Moins de 12 €", "12–20 €", "20–30 €", "Plus de 30 €"]} value={answers.q8 as string ?? ""} onChange={(v) => set("q8", v)} />
       </Question>
       <Question num={9} label="Avec qui sortez-vous au restaurant ?">
-        <Checkbox name="q9" options={["En couple", "En famille", "Entre amis", "Repas professionnels", "Seul"]} value={answers.q9 as string[] ?? []} onChange={(v) => set("q9", v)} />
+        <Checkbox options={["En couple", "En famille", "Entre amis", "Repas professionnels", "Seul"]} value={answers.q9 as string[] ?? []} onChange={(v) => set("q9", v)} />
       </Question>
       <Question num={10} label="Moment préféré pour sortir">
-        <Checkbox name="q10" options={["Déjeuner semaine", "Dîner semaine", "Déjeuner week-end", "Dîner week-end"]} value={answers.q10 as string[] ?? []} onChange={(v) => set("q10", v)} />
+        <Checkbox options={["Déjeuner semaine", "Dîner semaine", "Déjeuner week-end", "Dîner week-end"]} value={answers.q10 as string[] ?? []} onChange={(v) => set("q10", v)} />
       </Question>
       <Question num={11} label="Distance acceptable pour un bon restaurant">
-        <Radio name="q11" options={["Moins de 5 km", "5–15 km", "15–30 km", "Peu importe si ça vaut le coup"]} value={answers.q11 as string ?? ""} onChange={(v) => set("q11", v)} />
+        <Radio options={["Moins de 5 km", "5–15 km", "15–30 km", "Peu importe si ça vaut le coup"]} value={answers.q11 as string ?? ""} onChange={(v) => set("q11", v)} />
       </Question>
       <Question num={12} label="À quelle fréquence essayez-vous un nouveau restaurant ?">
-        <Radio name="q12" options={["Jamais", "1–2 fois par an", "3–5 fois par an", "Plus de 5 fois par an"]} value={answers.q12 as string ?? ""} onChange={(v) => set("q12", v)} />
+        <Radio options={["Jamais", "1–2 fois par an", "3–5 fois par an", "Plus de 5 fois par an"]} value={answers.q12 as string ?? ""} onChange={(v) => set("q12", v)} />
       </Question>
       <Question num={13} label="Recourez-vous à la livraison à domicile ?">
-        <Radio name="q13" options={["Jamais", "Rarement", "1–2 fois par mois", "Souvent"]} value={answers.q13 as string ?? ""} onChange={(v) => set("q13", v)} />
+        <Radio options={["Jamais", "Rarement", "1–2 fois par mois", "Souvent"]} value={answers.q13 as string ?? ""} onChange={(v) => set("q13", v)} />
       </Question>
     </>
   );
@@ -207,25 +207,25 @@ function Step3({ answers, set }: { answers: Answers; set: (k: string, v: string 
   return (
     <>
       <Question num={14} label="Comment évaluez-vous l'offre de restauration dans votre zone ?">
-        <Radio name="q14" options={["Très satisfaisante", "Plutôt satisfaisante", "Plutôt insuffisante", "Vraiment décevante"]} value={answers.q14 as string ?? ""} onChange={(v) => set("q14", v)} />
+        <Radio options={["Très satisfaisante", "Plutôt satisfaisante", "Plutôt insuffisante", "Vraiment décevante"]} value={answers.q14 as string ?? ""} onChange={(v) => set("q14", v)} />
       </Question>
       <Question num={15} label="Quels types d'établissements trouvez-vous trop nombreux ?">
-        <Checkbox name="q15" options={["Fast-foods", "Pizzerias classiques", "Kebabs", "Brasseries industrielles", "Restaurants de chaîne", "Aucun"]} value={answers.q15 as string[] ?? []} onChange={(v) => set("q15", v)} />
+        <Checkbox options={["Fast-foods", "Pizzerias classiques", "Kebabs", "Brasseries industrielles", "Restaurants de chaîne", "Aucun"]} value={answers.q15 as string[] ?? []} onChange={(v) => set("q15", v)} />
       </Question>
       <Question num={16} label="Qu'est-ce qui manque dans votre zone ?">
-        <Checkbox name="q16" options={["Restaurant gastronomique abordable", "Cuisine du monde authentique", "Produits locaux mis en avant", "Lieu chaleureux avec bonne ambiance", "Concept original", "Rien ne manque"]} value={answers.q16 as string[] ?? []} onChange={(v) => set("q16", v)} />
+        <Checkbox options={["Restaurant gastronomique abordable", "Cuisine du monde authentique", "Produits locaux mis en avant", "Lieu chaleureux avec bonne ambiance", "Concept original", "Rien ne manque"]} value={answers.q16 as string[] ?? []} onChange={(v) => set("q16", v)} />
       </Question>
       <Question num={17} label="Avez-vous déjà renoncé à sortir faute d'un endroit convenable ?">
-        <Radio name="q17" options={["Jamais", "Rarement", "Parfois", "Souvent"]} value={answers.q17 as string ?? ""} onChange={(v) => set("q17", v)} />
+        <Radio options={["Jamais", "Rarement", "Parfois", "Souvent"]} value={answers.q17 as string ?? ""} onChange={(v) => set("q17", v)} />
       </Question>
       <Question num={18} label="Si oui, pourquoi ?">
         <Textarea name="q18" value={answers.q18 as string ?? ""} onChange={(v) => set("q18", v)} placeholder="Décrivez la situation..." />
       </Question>
       <Question num={19} label="Prix juste pour un repas complet de qualité (entrée + plat + dessert)">
-        <Radio name="q19" options={["15–20 €", "20–28 €", "28–35 €", "Plus de 35 €"]} value={answers.q19 as string ?? ""} onChange={(v) => set("q19", v)} />
+        <Radio options={["15–20 €", "20–28 €", "28–35 €", "Plus de 35 €"]} value={answers.q19 as string ?? ""} onChange={(v) => set("q19", v)} />
       </Question>
       <Question num={20} label="Seriez-vous prêt à payer plus si la qualité le justifie ?">
-        <Radio name="q20" options={["Non, le prix est mon critère principal", "Oui, jusqu'à 5 € de plus", "Oui, jusqu'à 10 € de plus", "Oui, sans limite si c'est exceptionnel"]} value={answers.q20 as string ?? ""} onChange={(v) => set("q20", v)} />
+        <Radio options={["Non, le prix est mon critère principal", "Oui, jusqu'à 5 € de plus", "Oui, jusqu'à 10 € de plus", "Oui, sans limite si c'est exceptionnel"]} value={answers.q20 as string ?? ""} onChange={(v) => set("q20", v)} />
       </Question>
     </>
   );
@@ -235,22 +235,22 @@ function Step4({ answers, set }: { answers: Answers; set: (k: string, v: string 
   return (
     <>
       <Question num={21} label="Quels sont vos 3 critères les plus importants ?">
-        <Checkbox name="q21" max={3} options={["Qualité des produits", "Rapport qualité-prix", "Ambiance et décor", "Authenticité de la cuisine", "Rapidité du service", "Localisation", "Originalité du concept"]} value={answers.q21 as string[] ?? []} onChange={(v) => set("q21", v)} />
+        <Checkbox max={3} options={["Qualité des produits", "Rapport qualité-prix", "Ambiance et décor", "Authenticité de la cuisine", "Rapidité du service", "Localisation", "Originalité du concept"]} value={answers.q21 as string[] ?? []} onChange={(v) => set("q21", v)} />
       </Question>
       <Question num={22} label="Ce qui vous déçoit le plus actuellement dans la restauration locale">
         <Textarea name="q22" value={answers.q22 as string ?? ""} onChange={(v) => set("q22", v)} placeholder="Vos impressions..." />
       </Question>
       <Question num={23} label="La musique influence-t-elle votre expérience au restaurant ?">
-        <Radio name="q23" options={["Non", "Un peu", "Oui, elle contribue à l'ambiance", "Oui, une mauvaise musique peut me faire partir"]} value={answers.q23 as string ?? ""} onChange={(v) => set("q23", v)} />
+        <Radio options={["Non", "Un peu", "Oui, elle contribue à l'ambiance", "Oui, une mauvaise musique peut me faire partir"]} value={answers.q23 as string ?? ""} onChange={(v) => set("q23", v)} />
       </Question>
       <Question num={24} label="Êtes-vous sensible au parcours authentique du cuisinier ?">
-        <Radio name="q24" options={["Non, seul le résultat compte", "Un peu", "Oui, ça renforce ma confiance", "Oui, c'est un critère fort"]} value={answers.q24 as string ?? ""} onChange={(v) => set("q24", v)} />
+        <Radio options={["Non, seul le résultat compte", "Un peu", "Oui, ça renforce ma confiance", "Oui, c'est un critère fort"]} value={answers.q24 as string ?? ""} onChange={(v) => set("q24", v)} />
       </Question>
       <Question num={25} label="Préférez-vous une carte courte ou longue ?">
-        <Radio name="q25" options={["Carte longue", "Carte courte, gage de fraîcheur", "Peu importe"]} value={answers.q25 as string ?? ""} onChange={(v) => set("q25", v)} />
+        <Radio options={["Carte longue", "Carte courte, gage de fraîcheur", "Peu importe"]} value={answers.q25 as string ?? ""} onChange={(v) => set("q25", v)} />
       </Question>
       <Question num={26} label="L'identité visuelle d'un restaurant influence-t-elle votre choix avant d'y aller ?">
-        <Radio name="q26" options={["Non", "Un peu", "Oui", "Oui, c'est souvent mon premier filtre"]} value={answers.q26 as string ?? ""} onChange={(v) => set("q26", v)} />
+        <Radio options={["Non", "Un peu", "Oui", "Oui, c'est souvent mon premier filtre"]} value={answers.q26 as string ?? ""} onChange={(v) => set("q26", v)} />
       </Question>
     </>
   );
@@ -270,25 +270,25 @@ function Step5({ answers, set }: { answers: Answers; set: (k: string, v: string 
       </div>
 
       <Question num={27} label="Ce concept vous intéresse-t-il ?">
-        <Radio name="q27" options={["Pas du tout", "Peu", "Assez", "Beaucoup", "Énormément"]} value={answers.q27 as string ?? ""} onChange={(v) => set("q27", v)} />
+        <Radio options={["Pas du tout", "Peu", "Assez", "Beaucoup", "Énormément"]} value={answers.q27 as string ?? ""} onChange={(v) => set("q27", v)} />
       </Question>
       <Question num={28} label="Ce type d'établissement manque-t-il dans votre département ?">
-        <Radio name="q28" options={["Oui, clairement", "Plutôt oui", "Plutôt non", "Non"]} value={answers.q28 as string ?? ""} onChange={(v) => set("q28", v)} />
+        <Radio options={["Oui, clairement", "Plutôt oui", "Plutôt non", "Non"]} value={answers.q28 as string ?? ""} onChange={(v) => set("q28", v)} />
       </Question>
       <Question num={29} label="Quelles occasions vous amèneraient à le fréquenter ?">
-        <Checkbox name="q29" options={["Dîner romantique", "Repas de famille", "Sortie entre amis", "Déjeuner d'affaires", "Simple envie de bien manger", "Anniversaire"]} value={answers.q29 as string[] ?? []} onChange={(v) => set("q29", v)} />
+        <Checkbox options={["Dîner romantique", "Repas de famille", "Sortie entre amis", "Déjeuner d'affaires", "Simple envie de bien manger", "Anniversaire"]} value={answers.q29 as string[] ?? []} onChange={(v) => set("q29", v)} />
       </Question>
       <Question num={30} label="Seriez-vous dans les premiers à l'essayer ?">
-        <Radio name="q30" options={["Non", "Peut-être", "Probablement oui", "Oui, certainement"]} value={answers.q30 as string ?? ""} onChange={(v) => set("q30", v)} />
+        <Radio options={["Non", "Peut-être", "Probablement oui", "Oui, certainement"]} value={answers.q30 as string ?? ""} onChange={(v) => set("q30", v)} />
       </Question>
       <Question num={31} label="Recommanderiez-vous ce restaurant si vous étiez satisfait ?">
-        <Radio name="q31" options={["Non", "Peut-être", "Sûrement", "Oui, je recommande facilement"]} value={answers.q31 as string ?? ""} onChange={(v) => set("q31", v)} />
+        <Radio options={["Non", "Peut-être", "Sûrement", "Oui, je recommande facilement"]} value={answers.q31 as string ?? ""} onChange={(v) => set("q31", v)} />
       </Question>
       <Question num={32} label="Qu'est-ce qui pourrait vous empêcher de venir ?">
         <Textarea name="q32" value={answers.q32 as string ?? ""} onChange={(v) => set("q32", v)} placeholder="Distance, prix, habitudes..." />
       </Question>
       <Question num={33} label="Quelle formule préféreriez-vous ?">
-        <Radio name="q33" options={["À la carte uniquement", "Menu fixe du jour", "Les deux", "Menu dégustation le soir"]} value={answers.q33 as string ?? ""} onChange={(v) => set("q33", v)} />
+        <Radio options={["À la carte uniquement", "Menu fixe du jour", "Les deux", "Menu dégustation le soir"]} value={answers.q33 as string ?? ""} onChange={(v) => set("q33", v)} />
       </Question>
     </>
   );
@@ -298,19 +298,19 @@ function Step6({ answers, set }: { answers: Answers; set: (k: string, v: string 
   return (
     <>
       <Question num={34} label="Comment découvrez-vous de nouveaux restaurants ?">
-        <Checkbox name="q34" options={["Instagram", "Google Maps", "Bouche-à-oreille", "TikTok", "Presse locale", "Passage devant"]} value={answers.q34 as string[] ?? []} onChange={(v) => set("q34", v)} />
+        <Checkbox options={["Instagram", "Google Maps", "Bouche-à-oreille", "TikTok", "Presse locale", "Passage devant"]} value={answers.q34 as string[] ?? []} onChange={(v) => set("q34", v)} />
       </Question>
       <Question num={35} label="Suivez-vous des comptes food sur les réseaux sociaux ?">
-        <Radio name="q35" options={["Non", "Quelques-uns", "Oui régulièrement", "Oui, c'est ma principale source"]} value={answers.q35 as string ?? ""} onChange={(v) => set("q35", v)} />
+        <Radio options={["Non", "Quelques-uns", "Oui régulièrement", "Oui, c'est ma principale source"]} value={answers.q35 as string ?? ""} onChange={(v) => set("q35", v)} />
       </Question>
       <Question num={36} label="Un Instagram soigné vous donnerait-il envie d'essayer un restaurant ?">
-        <Radio name="q36" options={["Non", "Un peu", "Oui", "Oui, c'est souvent le déclencheur"]} value={answers.q36 as string ?? ""} onChange={(v) => set("q36", v)} />
+        <Radio options={["Non", "Un peu", "Oui", "Oui, c'est souvent le déclencheur"]} value={answers.q36 as string ?? ""} onChange={(v) => set("q36", v)} />
       </Question>
       <Question num={37} label="Ce qui vous inciterait à revenir régulièrement">
-        <Checkbox name="q37" options={["Constance de la qualité", "Carte saisonnière", "Programme de fidélité", "Événements réguliers", "Relation chaleureuse avec l'équipe", "Prix stables"]} value={answers.q37 as string[] ?? []} onChange={(v) => set("q37", v)} />
+        <Checkbox options={["Constance de la qualité", "Carte saisonnière", "Programme de fidélité", "Événements réguliers", "Relation chaleureuse avec l'équipe", "Prix stables"]} value={answers.q37 as string[] ?? []} onChange={(v) => set("q37", v)} />
       </Question>
       <Question num={38} label="Laissez-vous des avis en ligne ?">
-        <Radio name="q38" options={["Non, jamais", "Rarement", "Parfois", "Oui, régulièrement"]} value={answers.q38 as string ?? ""} onChange={(v) => set("q38", v)} />
+        <Radio options={["Non, jamais", "Rarement", "Parfois", "Oui, régulièrement"]} value={answers.q38 as string ?? ""} onChange={(v) => set("q38", v)} />
       </Question>
       <Question num={39} label="Commentaire libre — vos attentes ou remarques pour ce projet">
         <Textarea name="q39" value={answers.q39 as string ?? ""} onChange={(v) => set("q39", v)} placeholder="Tout ce que vous souhaitez partager..." />
