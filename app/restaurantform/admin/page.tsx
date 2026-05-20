@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getAllResponses } from "../actions";
+import { getAllResponses, deleteAllResponses } from "../actions";
 
 const AMBER = "#C17B3A";
 
@@ -56,6 +56,7 @@ export default function AdminPage() {
   const [responses, setResponses] = useState<Response[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   // Check sessionStorage on mount
   useEffect(() => {
@@ -77,6 +78,18 @@ export default function AdminPage() {
       }
     });
   }, [authed]);
+
+  const handleDeleteAll = async () => {
+    if (!window.confirm("Supprimer toutes les réponses ? Cette action est irréversible.")) return;
+    setDeleting(true);
+    const result = await deleteAllResponses();
+    setDeleting(false);
+    if (result.success) {
+      setResponses([]);
+    } else {
+      alert("Erreur : " + result.error);
+    }
+  };
 
   const handleLogin = () => {
     const correct = process.env.NEXT_PUBLIC_SURVEY_ADMIN_PASSWORD;
@@ -153,8 +166,8 @@ export default function AdminPage() {
               </div>
             </div>
 
-            {/* Export buttons */}
-            <div className="flex gap-3 mb-8">
+            {/* Export + Delete buttons */}
+            <div className="flex flex-wrap gap-3 mb-8">
               <button
                 onClick={() => downloadFile(toCSV(responses), "survey_responses.csv", "text/csv")}
                 className="px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90"
@@ -169,6 +182,13 @@ export default function AdminPage() {
                 className="px-5 py-2.5 rounded-full text-sm font-semibold text-stone-700 border border-stone-200 bg-white hover:border-stone-300 transition-colors"
               >
                 Exporter en JSON
+              </button>
+              <button
+                onClick={handleDeleteAll}
+                disabled={deleting || responses.length === 0}
+                className="px-5 py-2.5 rounded-full text-sm font-semibold text-red-600 border border-red-200 bg-white hover:bg-red-50 transition-colors disabled:opacity-40 ml-auto"
+              >
+                {deleting ? "Suppression..." : "Supprimer tout"}
               </button>
             </div>
 

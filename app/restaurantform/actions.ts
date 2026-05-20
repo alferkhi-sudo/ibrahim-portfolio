@@ -23,6 +23,17 @@ export async function submitSurvey(
   }
 }
 
+export async function deleteAllResponses(): Promise<{ success: boolean; error?: string }> {
+  try {
+    const admin = createAdminClient();
+    const { error } = await admin.from("survey_responses").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+    if (error) return { success: false, error: error.message };
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: String(err) };
+  }
+}
+
 export async function getAllResponses(): Promise<{
   data: Array<{ id: string; created_at: string; answers: Record<string, unknown>; metadata: Record<string, unknown> }> | null;
   error?: string;
