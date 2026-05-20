@@ -159,7 +159,7 @@ function Step1({ answers, set }: { answers: Answers; set: (k: string, v: string 
         <p className="text-stone-700 text-sm leading-relaxed">
           <strong>ShaiMaMa</strong> est un projet de restaurant en cours de création en Normandie (depts 27 & 76).
           Cuisine authentique préparée avec des techniques artisanales apprises en Italie, produits frais et locaux,
-          ambiance soignée, plats généreux entre 14 et 20 €. Ce sondage nous aide à mieux comprendre vos attentes.
+          ambiance soignée. Ce sondage nous aide à mieux comprendre vos attentes.
         </p>
       </div>
 
