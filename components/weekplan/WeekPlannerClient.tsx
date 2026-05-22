@@ -5,13 +5,11 @@ import { useRouter } from "next/navigation";
 import ActivityModal from "./ActivityModal";
 import {
   Activity,
-  Category,
   Day,
   DAYS,
   CATEGORIES,
   getCategoryStyle,
   timeToMin,
-  minToTime,
   formatDuration,
   GRID_START,
   GRID_END,
