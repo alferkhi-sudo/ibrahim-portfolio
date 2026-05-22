@@ -97,5 +97,51 @@
     "comingSoon": "Coming Soon",
     "copyright": "Ibrahim",
     "footerStatement": "Always exploring."
+  },
+  "weekplan": {
+    "title": "Week Planner",
+    "private": "PRIVATE",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••••••",
+    "enterButton": "Enter",
+    "checking": "Checking…",
+    "wrongPassword": "Incorrect password. Try again.",
+    "enterPassword": "Enter the password to continue",
+    "logout": "Logout",
+    "addActivity": "Add Activity",
+    "editActivity": "Edit Activity",
+    "titleLabel": "Title",
+    "titlePlaceholder": "e.g. Morning run",
+    "dayLabel": "Day",
+    "startLabel": "Start",
+    "endLabel": "End",
+    "categoryLabel": "Category",
+    "saveButton": "Save",
+    "cancelButton": "Cancel",
+    "addButton": "Add",
+    "deleteButton": "Delete",
+    "confirmDelete": "Confirm delete?",
+    "saving": "Saving…",
+    "deleting": "Deleting…",
+    "free": "Free",
+    "noActivities": "No activities yet.",
+    "categories": {
+      "WORK": "Work",
+      "TRAINING": "Training",
+      "MEALS": "Meals",
+      "CREATIVE": "Creative",
+      "WELLNESS_ERRAND": "Wellness/Errand",
+      "ROUTINE": "Routine",
+      "FREE": "Free Time"
+    },
+    "days": {
+      "MON": "Monday",
+      "TUE": "Tuesday",
+      "WED": "Wednesday",
+      "THU": "Thursday",
+      "FRI": "Friday",
+      "SAT": "Saturday",
+      "SUN": "Sunday"
+    }
   }
 }

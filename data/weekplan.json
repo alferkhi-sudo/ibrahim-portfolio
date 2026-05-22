@@ -1,0 +1,328 @@
+{
+  "activities": [
+    {
+      "id": "d-mon-1",
+      "day": "MON",
+      "title": "Wakeup",
+      "startTime": "06:30",
+      "endTime": "06:45",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-mon-2",
+      "day": "MON",
+      "title": "WFH Work",
+      "startTime": "08:00",
+      "endTime": "18:00",
+      "category": "WORK",
+      "isDefault": true
+    },
+    {
+      "id": "d-mon-3",
+      "day": "MON",
+      "title": "Easy Run",
+      "startTime": "18:30",
+      "endTime": "19:15",
+      "category": "TRAINING",
+      "isDefault": true
+    },
+    {
+      "id": "d-mon-4",
+      "day": "MON",
+      "title": "Eat",
+      "startTime": "19:15",
+      "endTime": "20:00",
+      "category": "MEALS",
+      "isDefault": true
+    },
+    {
+      "id": "d-mon-5",
+      "day": "MON",
+      "title": "Sleep",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-tue-1",
+      "day": "TUE",
+      "title": "Wakeup",
+      "startTime": "06:30",
+      "endTime": "06:45",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-tue-2",
+      "day": "TUE",
+      "title": "WFO Work",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "category": "WORK",
+      "isDefault": true
+    },
+    {
+      "id": "d-tue-3",
+      "day": "TUE",
+      "title": "Commute Home",
+      "startTime": "18:00",
+      "endTime": "19:15",
+      "category": "WELLNESS_ERRAND",
+      "isDefault": true
+    },
+    {
+      "id": "d-tue-4",
+      "day": "TUE",
+      "title": "Gym",
+      "startTime": "19:30",
+      "endTime": "20:15",
+      "category": "TRAINING",
+      "isDefault": true
+    },
+    {
+      "id": "d-tue-5",
+      "day": "TUE",
+      "title": "Eat",
+      "startTime": "20:30",
+      "endTime": "21:00",
+      "category": "MEALS",
+      "isDefault": true
+    },
+    {
+      "id": "d-tue-6",
+      "day": "TUE",
+      "title": "Sleep",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-wed-1",
+      "day": "WED",
+      "title": "Wakeup",
+      "startTime": "06:30",
+      "endTime": "06:45",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-wed-2",
+      "day": "WED",
+      "title": "WFH Work",
+      "startTime": "08:00",
+      "endTime": "18:00",
+      "category": "WORK",
+      "isDefault": true
+    },
+    {
+      "id": "d-wed-3",
+      "day": "WED",
+      "title": "Tempo Run",
+      "startTime": "18:30",
+      "endTime": "19:15",
+      "category": "TRAINING",
+      "isDefault": true
+    },
+    {
+      "id": "d-wed-4",
+      "day": "WED",
+      "title": "Eat",
+      "startTime": "19:15",
+      "endTime": "20:00",
+      "category": "MEALS",
+      "isDefault": true
+    },
+    {
+      "id": "d-wed-5",
+      "day": "WED",
+      "title": "Sleep",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-thu-1",
+      "day": "THU",
+      "title": "Wakeup",
+      "startTime": "06:30",
+      "endTime": "06:45",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-thu-2",
+      "day": "THU",
+      "title": "WFO Work",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "category": "WORK",
+      "isDefault": true
+    },
+    {
+      "id": "d-thu-3",
+      "day": "THU",
+      "title": "Commute Home",
+      "startTime": "18:00",
+      "endTime": "19:15",
+      "category": "WELLNESS_ERRAND",
+      "isDefault": true
+    },
+    {
+      "id": "d-thu-4",
+      "day": "THU",
+      "title": "Gym",
+      "startTime": "19:30",
+      "endTime": "20:15",
+      "category": "TRAINING",
+      "isDefault": true
+    },
+    {
+      "id": "d-thu-5",
+      "day": "THU",
+      "title": "Eat",
+      "startTime": "20:30",
+      "endTime": "21:00",
+      "category": "MEALS",
+      "isDefault": true
+    },
+    {
+      "id": "d-thu-6",
+      "day": "THU",
+      "title": "Sleep",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-fri-1",
+      "day": "FRI",
+      "title": "Wakeup",
+      "startTime": "06:30",
+      "endTime": "06:45",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-fri-2",
+      "day": "FRI",
+      "title": "WFH Work",
+      "startTime": "08:00",
+      "endTime": "18:00",
+      "category": "WORK",
+      "isDefault": true
+    },
+    {
+      "id": "d-fri-3",
+      "day": "FRI",
+      "title": "Groceries",
+      "startTime": "18:30",
+      "endTime": "19:30",
+      "category": "WELLNESS_ERRAND",
+      "isDefault": true
+    },
+    {
+      "id": "d-fri-4",
+      "day": "FRI",
+      "title": "Sleep",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-sat-1",
+      "day": "SAT",
+      "title": "Wakeup",
+      "startTime": "06:30",
+      "endTime": "06:45",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-sat-2",
+      "day": "SAT",
+      "title": "Long Run",
+      "startTime": "07:00",
+      "endTime": "08:15",
+      "category": "TRAINING",
+      "isDefault": true
+    },
+    {
+      "id": "d-sat-3",
+      "day": "SAT",
+      "title": "Breakfast",
+      "startTime": "08:30",
+      "endTime": "09:15",
+      "category": "MEALS",
+      "isDefault": true
+    },
+    {
+      "id": "d-sat-4",
+      "day": "SAT",
+      "title": "Filming",
+      "startTime": "09:45",
+      "endTime": "12:00",
+      "category": "CREATIVE",
+      "isDefault": true
+    },
+    {
+      "id": "d-sat-5",
+      "day": "SAT",
+      "title": "Sleep",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-sun-1",
+      "day": "SUN",
+      "title": "Wakeup",
+      "startTime": "06:30",
+      "endTime": "06:45",
+      "category": "ROUTINE",
+      "isDefault": true
+    },
+    {
+      "id": "d-sun-2",
+      "day": "SUN",
+      "title": "AquaTonic",
+      "startTime": "09:30",
+      "endTime": "10:15",
+      "category": "WELLNESS_ERRAND",
+      "isDefault": true
+    },
+    {
+      "id": "d-sun-3",
+      "day": "SUN",
+      "title": "Breakfast",
+      "startTime": "10:45",
+      "endTime": "11:15",
+      "category": "MEALS",
+      "isDefault": true
+    },
+    {
+      "id": "d-sun-4",
+      "day": "SUN",
+      "title": "Video Editing",
+      "startTime": "11:45",
+      "endTime": "13:30",
+      "category": "CREATIVE",
+      "isDefault": true
+    },
+    {
+      "id": "d-sun-5",
+      "day": "SUN",
+      "title": "Sleep",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "category": "ROUTINE",
+      "isDefault": true
+    }
+  ]
+}

@@ -97,5 +97,51 @@
     "comingSoon": "Bientôt Disponible",
     "copyright": "Ibrahim",
     "footerStatement": "Toujours en exploration."
+  },
+  "weekplan": {
+    "title": "Planificateur Hebdomadaire",
+    "private": "PRIVÉ",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "••••••••••••",
+    "enterButton": "Entrer",
+    "checking": "Vérification…",
+    "wrongPassword": "Mot de passe incorrect. Réessayez.",
+    "enterPassword": "Entrez le mot de passe pour continuer",
+    "logout": "Déconnexion",
+    "addActivity": "Ajouter une activité",
+    "editActivity": "Modifier l'activité",
+    "titleLabel": "Titre",
+    "titlePlaceholder": "ex. Course matinale",
+    "dayLabel": "Jour",
+    "startLabel": "Début",
+    "endLabel": "Fin",
+    "categoryLabel": "Catégorie",
+    "saveButton": "Enregistrer",
+    "cancelButton": "Annuler",
+    "addButton": "Ajouter",
+    "deleteButton": "Supprimer",
+    "confirmDelete": "Confirmer la suppression?",
+    "saving": "Enregistrement…",
+    "deleting": "Suppression…",
+    "free": "Libre",
+    "noActivities": "Aucune activité pour l'instant.",
+    "categories": {
+      "WORK": "Travail",
+      "TRAINING": "Entraînement",
+      "MEALS": "Repas",
+      "CREATIVE": "Créatif",
+      "WELLNESS_ERRAND": "Bien-être/Courses",
+      "ROUTINE": "Routine",
+      "FREE": "Temps libre"
+    },
+    "days": {
+      "MON": "Lundi",
+      "TUE": "Mardi",
+      "WED": "Mercredi",
+      "THU": "Jeudi",
+      "FRI": "Vendredi",
+      "SAT": "Samedi",
+      "SUN": "Dimanche"
+    }
   }
 }
