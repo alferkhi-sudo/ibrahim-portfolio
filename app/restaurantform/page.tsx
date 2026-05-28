@@ -118,26 +118,6 @@ function Textarea({
   );
 }
 
-function TextInput({
-  name, value, onChange, placeholder,
-}: {
-  name: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-}) {
-  return (
-    <input
-      type="text"
-      name={name}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder ?? "Votre réponse..."}
-      className="w-full mt-2 p-3 rounded-lg border border-stone-200 bg-white text-stone-700 text-sm focus:outline-none focus:border-[#C17B3A] transition-colors placeholder:text-stone-300"
-    />
-  );
-}
-
 function Question({ num, label, children, optional }: { num: number; label: string; children: React.ReactNode; optional?: boolean }) {
   return (
     <div className="mb-6">
