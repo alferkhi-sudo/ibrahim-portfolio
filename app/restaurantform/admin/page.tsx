@@ -137,7 +137,7 @@ export default function AdminPage() {
     <div className="min-h-screen bg-[#FAFAF8] p-5 md:p-10">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <p className="text-xs uppercase tracking-widest text-[#C17B3A] font-mono mb-1">Mama Shaima — Admin</p>
+          <p className="text-xs uppercase tracking-widest text-[#C17B3A] font-mono mb-1">ShaiMama — Admin</p>
           <h1 className="text-2xl font-bold text-stone-800">Réponses au sondage</h1>
         </div>
 

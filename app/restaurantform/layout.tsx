@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sondage — ShaiMaMa",
+  title: "Sondage — ShaiMama",
   description: "Aidez-nous à créer un restaurant à la hauteur de vos attentes.",
   robots: { index: false, follow: false },
 };
