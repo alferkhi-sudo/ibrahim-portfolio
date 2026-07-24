@@ -14,11 +14,11 @@ export async function GET() {
       orientation: "portrait",
       background_color: "#0b0c10",
       theme_color: "#0b0c10",
+      // Apple-only: iOS reads the apple-touch-icon <link> in layout.tsx for
+      // the home-screen icon, not this array. Kept minimal for any other
+      // WebKit-based reader that does check the manifest.
       icons: [
-        { src: "/plantasks/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-        { src: "/plantasks/icon-192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
-        { src: "/plantasks/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
-        { src: "/plantasks/icon-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+        { src: "/plantasks/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
       ],
     },
     { headers: { "Content-Type": "application/manifest+json" } }
