@@ -10,9 +10,11 @@ import {
   type NewPlantasksEvent,
   type PlantasksEvent,
 } from "@/lib/plantasks/types";
+import type { EventOccurrence } from "@/lib/plantasks/recurrence";
 import GlassPanel from "./GlassPanel";
 
 type Recurrence = "none" | "daily" | "weekly";
+type EditScope = "this" | "all";
 
 interface FormState {
   title: string;
@@ -73,33 +75,70 @@ export default function DayDetailSheet({
   events,
   onClose,
   onCreate,
-  onUpdate,
-  onDelete,
+  onEditOccurrence,
+  onDeleteOccurrence,
 }: {
   date: Date | null;
-  events: PlantasksEvent[];
+  events: EventOccurrence[];
   onClose: () => void;
   onCreate: (event: NewPlantasksEvent) => void;
-  onUpdate: (id: string, patch: Partial<PlantasksEvent>) => void;
-  onDelete: (id: string) => void;
+  onEditOccurrence: (occurrence: EventOccurrence, patch: Partial<PlantasksEvent>, scope: EditScope) => void;
+  onDeleteOccurrence: (occurrence: EventOccurrence, scope: EditScope) => void;
 }) {
   const [editingId, setEditingId] = useState<string | "new" | null>(null);
+  const [editingOccurrence, setEditingOccurrence] = useState<EventOccurrence | null>(null);
+  const [editingScope, setEditingScope] = useState<EditScope>("this");
   const [form, setForm] = useState<FormState>(blankForm());
+  const [scopePrompt, setScopePrompt] = useState<{
+    action: "edit" | "delete";
+    occurrence: EventOccurrence;
+  } | null>(null);
 
   const isOpen = date !== null;
 
   function startAdd() {
     setForm(blankForm());
+    setEditingOccurrence(null);
     setEditingId("new");
   }
 
-  function startEdit(event: PlantasksEvent) {
-    setForm(formFromEvent(event));
-    setEditingId(event.id);
+  function startEdit(occurrence: EventOccurrence, scope: EditScope) {
+    setForm(formFromEvent(occurrence));
+    setEditingOccurrence(occurrence);
+    setEditingScope(scope);
+    setEditingId(occurrence.id);
+  }
+
+  function handleEditClick(occurrence: EventOccurrence) {
+    if (occurrence.isVirtual) {
+      setScopePrompt({ action: "edit", occurrence });
+    } else {
+      startEdit(occurrence, "this");
+    }
+  }
+
+  function handleDeleteClick(occurrence: EventOccurrence) {
+    if (occurrence.isVirtual) {
+      setScopePrompt({ action: "delete", occurrence });
+    } else {
+      onDeleteOccurrence(occurrence, "this");
+    }
+  }
+
+  function resolveScope(scope: EditScope) {
+    if (!scopePrompt) return;
+    const { action, occurrence } = scopePrompt;
+    setScopePrompt(null);
+    if (action === "edit") {
+      startEdit(occurrence, scope);
+    } else {
+      onDeleteOccurrence(occurrence, scope);
+    }
   }
 
   function cancelForm() {
     setEditingId(null);
+    setEditingOccurrence(null);
   }
 
   function saveForm() {
@@ -134,23 +173,30 @@ export default function DayDetailSheet({
         excluded_dates: [],
         notes: form.notes.trim() || null,
       });
-    } else if (editingId) {
-      onUpdate(editingId, {
-        title: form.title.trim(),
-        category: form.category,
-        start_at: startAt,
-        end_at: endAt,
-        all_day: form.allDay,
-        rrule,
-        notes: form.notes.trim() || null,
-      });
+    } else if (editingOccurrence) {
+      onEditOccurrence(
+        editingOccurrence,
+        {
+          title: form.title.trim(),
+          category: form.category,
+          start_at: startAt,
+          end_at: endAt,
+          all_day: form.allDay,
+          rrule,
+          notes: form.notes.trim() || null,
+        },
+        editingScope
+      );
     }
 
     setEditingId(null);
+    setEditingOccurrence(null);
   }
 
   function handleClose() {
     setEditingId(null);
+    setEditingOccurrence(null);
+    setScopePrompt(null);
     onClose();
   }
 
@@ -187,7 +233,36 @@ export default function DayDetailSheet({
                 </button>
               </div>
 
-              {editingId === null && (
+              {scopePrompt && (
+                <div className="mb-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                  <p className="mb-3 text-sm text-white/80">
+                    {scopePrompt.action === "edit" ? "Edit" : "Delete"} “{scopePrompt.occurrence.title}” —
+                    this is part of a repeating series.
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => resolveScope("this")}
+                      className="flex-1 rounded-2xl border border-white/15 py-2.5 text-sm font-medium text-white/80 transition-colors hover:text-white"
+                    >
+                      Just this event
+                    </button>
+                    <button
+                      onClick={() => resolveScope("all")}
+                      className="flex-1 rounded-2xl border border-white/15 py-2.5 text-sm font-medium text-white/80 transition-colors hover:text-white"
+                    >
+                      All events
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => setScopePrompt(null)}
+                    className="mt-2 w-full text-xs text-white/40 hover:text-white/60"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+
+              {editingId === null && !scopePrompt && (
                 <>
                   <div className="mb-4 flex flex-col gap-2">
                     {events.length === 0 && (
@@ -206,11 +281,24 @@ export default function DayDetailSheet({
                           }}
                         />
                         <div className="min-w-0 flex-1">
-                          <p className="truncate text-sm font-medium text-white">{event.title}</p>
+                          <div className="flex items-center gap-1.5">
+                            <p className="truncate text-sm font-medium text-white">{event.title}</p>
+                            {(event.isVirtual || event.rrule) && (
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 text-white/30">
+                                <path
+                                  d="M17 2.1l4 4-4 4M3 12.6v-2a4 4 0 014-4h14M7 21.9l-4-4 4-4M21 11.4v2a4 4 0 01-4 4H3"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            )}
+                          </div>
                           <p className="text-xs text-white/40">{formatTimeRange(event)}</p>
                         </div>
                         <button
-                          onClick={() => startEdit(event)}
+                          onClick={() => handleEditClick(event)}
                           className="rounded-full p-2 text-white/40 transition-colors hover:bg-white/10 hover:text-white"
                           aria-label="Edit"
                         >
@@ -232,7 +320,7 @@ export default function DayDetailSheet({
                           </svg>
                         </button>
                         <button
-                          onClick={() => onDelete(event.id)}
+                          onClick={() => handleDeleteClick(event)}
                           className="rounded-full p-2 text-white/40 transition-colors hover:bg-red-500/20 hover:text-red-300"
                           aria-label="Delete"
                         >
@@ -263,6 +351,12 @@ export default function DayDetailSheet({
 
               {editingId !== null && (
                 <div className="flex flex-col gap-3">
+                  {editingOccurrence && (
+                    <p className="text-xs text-white/40">
+                      {editingScope === "this" ? "Editing just this event" : "Editing all events in this series"}
+                    </p>
+                  )}
+
                   <input
                     autoFocus
                     value={form.title}
@@ -319,15 +413,17 @@ export default function DayDetailSheet({
                     </div>
                   )}
 
-                  <select
-                    value={form.recurrence}
-                    onChange={(e) => setForm((f) => ({ ...f, recurrence: e.target.value as Recurrence }))}
-                    className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-white/30"
-                  >
-                    <option className="bg-[#1a1a1f]" value="none">Does not repeat</option>
-                    <option className="bg-[#1a1a1f]" value="daily">Repeats daily</option>
-                    <option className="bg-[#1a1a1f]" value="weekly">Repeats weekly</option>
-                  </select>
+                  {!(editingOccurrence && editingScope === "this") && (
+                    <select
+                      value={form.recurrence}
+                      onChange={(e) => setForm((f) => ({ ...f, recurrence: e.target.value as Recurrence }))}
+                      className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-white/30"
+                    >
+                      <option className="bg-[#1a1a1f]" value="none">Does not repeat</option>
+                      <option className="bg-[#1a1a1f]" value="daily">Repeats daily</option>
+                      <option className="bg-[#1a1a1f]" value="weekly">Repeats weekly</option>
+                    </select>
+                  )}
 
                   <textarea
                     value={form.notes}

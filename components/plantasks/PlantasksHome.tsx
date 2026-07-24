@@ -9,8 +9,9 @@ import CategoryLegend from "./CategoryLegend";
 import DayDetailSheet from "./DayDetailSheet";
 import GlassPanel from "./GlassPanel";
 import SignOutButton from "./SignOutButton";
-import { addMonths, isSameDay } from "@/lib/plantasks/calendarMath";
+import { addMonths, getMonthMatrix, isSameDay } from "@/lib/plantasks/calendarMath";
 import { fetchEvents, createEvent, updateEvent, deleteEvent } from "@/lib/plantasks/api";
+import { expandEvents, type EventOccurrence } from "@/lib/plantasks/recurrence";
 import type { EventCategory, NewPlantasksEvent, PlantasksEvent } from "@/lib/plantasks/types";
 
 export default function PlantasksHome({ email, userId }: { email?: string; userId: string }) {
@@ -35,9 +36,16 @@ export default function PlantasksHome({ email, userId }: { email?: string; userI
     [viewDate]
   );
 
+  const expandedEvents = useMemo(() => {
+    const weeks = getMonthMatrix(viewDate);
+    const rangeStart = weeks[0][0];
+    const rangeEnd = weeks[weeks.length - 1][6];
+    return expandEvents(events, rangeStart, rangeEnd);
+  }, [events, viewDate]);
+
   const visibleEvents = useMemo(
-    () => events.filter((e) => !hidden.has(e.category)),
-    [events, hidden]
+    () => expandedEvents.filter((e) => !hidden.has(e.category)),
+    [expandedEvents, hidden]
   );
 
   const selectedDayEvents = useMemo(() => {
@@ -88,6 +96,67 @@ export default function PlantasksHome({ email, userId }: { email?: string; userI
     } catch {
       setError("Couldn't delete that event. Try again.");
     }
+  }
+
+  async function handleEditOccurrence(
+    occurrence: EventOccurrence,
+    patch: Partial<PlantasksEvent>,
+    scope: "this" | "all"
+  ) {
+    // Non-virtual rows (one-offs and existing exceptions) are already
+    // isolated to a single date — just edit the row directly regardless
+    // of the scope the sheet resolved (it only prompts for virtual ones).
+    if (!occurrence.isVirtual) {
+      return handleUpdate(occurrence.id, patch);
+    }
+
+    if (scope === "all") {
+      return handleUpdate(occurrence.seriesId!, patch);
+    }
+
+    // scope === "this": exclude this date from the base series and spin
+    // off a standalone exception row carrying the edited fields.
+    const base = events.find((e) => e.id === occurrence.seriesId);
+    if (!base) return;
+    try {
+      await updateEvent(base.id, {
+        excluded_dates: [...base.excluded_dates, occurrence.start_at],
+      });
+      const created = await createEvent(userId, {
+        title: patch.title ?? occurrence.title,
+        category: patch.category ?? occurrence.category,
+        start_at: patch.start_at ?? occurrence.start_at,
+        end_at: patch.end_at ?? occurrence.end_at,
+        all_day: patch.all_day ?? occurrence.all_day,
+        rrule: null,
+        parent_event_id: base.id,
+        excluded_dates: [],
+        notes: patch.notes ?? occurrence.notes,
+      });
+      setEvents((prev) => [
+        ...prev.map((e) =>
+          e.id === base.id ? { ...e, excluded_dates: [...e.excluded_dates, occurrence.start_at] } : e
+        ),
+        created,
+      ]);
+    } catch {
+      setError("Couldn't update this occurrence. Try again.");
+    }
+  }
+
+  async function handleDeleteOccurrence(occurrence: EventOccurrence, scope: "this" | "all") {
+    if (!occurrence.isVirtual) {
+      return handleDelete(occurrence.id);
+    }
+
+    if (scope === "all") {
+      return handleDelete(occurrence.seriesId!);
+    }
+
+    // scope === "this": soft-delete just this date from the base series.
+    const base = events.find((e) => e.id === occurrence.seriesId);
+    if (!base) return;
+    await handleUpdate(base.id, { excluded_dates: [...base.excluded_dates, occurrence.start_at] });
   }
 
   function goToday() {
@@ -142,8 +211,8 @@ export default function PlantasksHome({ email, userId }: { email?: string; userI
         events={selectedDayEvents}
         onClose={() => setSelectedDate(null)}
         onCreate={handleCreate}
-        onUpdate={handleUpdate}
-        onDelete={handleDelete}
+        onEditOccurrence={handleEditOccurrence}
+        onDeleteOccurrence={handleDeleteOccurrence}
       />
 
       <AnimatePresence>
