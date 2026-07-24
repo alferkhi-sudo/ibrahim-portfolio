@@ -2,6 +2,7 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "./i18n/request";
 import { verifyWeekplanToken } from "./lib/weekplan-auth";
+import { getPlantasksSession } from "./lib/supabase/middleware";
 
 const intlMiddleware = createMiddleware({
   locales,
@@ -38,6 +39,25 @@ export default async function middleware(request: NextRequest) {
     }
 
     return NextResponse.next();
+  }
+
+  // PlanTasks pages — check Supabase session
+  // (manifest.webmanifest is excluded by the matcher below already, since
+  // any path containing a "." is skipped by the middleware entirely)
+  if (pathname.startsWith("/plantasks")) {
+    if (pathname === "/plantasks/login") {
+      return NextResponse.next();
+    }
+
+    const { user, response } = await getPlantasksSession(request);
+
+    if (!user) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/plantasks/login";
+      return NextResponse.redirect(url);
+    }
+
+    return response;
   }
 
   // All other routes — next-intl
