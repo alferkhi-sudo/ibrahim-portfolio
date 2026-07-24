@@ -9,7 +9,7 @@ import CategoryLegend from "./CategoryLegend";
 import DayDetailSheet from "./DayDetailSheet";
 import GlassPanel from "./GlassPanel";
 import SignOutButton from "./SignOutButton";
-import { addMonths, getMonthMatrix, isSameDay } from "@/lib/plantasks/calendarMath";
+import { addDays, addMonths, dateOnly, getMonthMatrix, isSameDay } from "@/lib/plantasks/calendarMath";
 import { fetchEvents, createEvent, updateEvent, deleteEvent } from "@/lib/plantasks/api";
 import { expandEvents, type EventOccurrence } from "@/lib/plantasks/recurrence";
 import type { EventCategory, NewPlantasksEvent, PlantasksEvent } from "@/lib/plantasks/types";
@@ -98,24 +98,11 @@ export default function PlantasksHome({ email, userId }: { email?: string; userI
     }
   }
 
-  async function handleEditOccurrence(
-    occurrence: EventOccurrence,
-    patch: Partial<PlantasksEvent>,
-    scope: "this" | "all"
-  ) {
-    // Non-virtual rows (one-offs and existing exceptions) are already
-    // isolated to a single date — just edit the row directly regardless
-    // of the scope the sheet resolved (it only prompts for virtual ones).
-    if (!occurrence.isVirtual) {
-      return handleUpdate(occurrence.id, patch);
-    }
-
-    if (scope === "all") {
-      return handleUpdate(occurrence.seriesId!, patch);
-    }
-
-    // scope === "this": exclude this date from the base series and spin
-    // off a standalone exception row carrying the edited fields.
+  // Excludes this occurrence's date from its base series and spins off a
+  // standalone exception row carrying `patch`. Shared by the day sheet's
+  // "just this event" scope and by drag/resize, which always act on a
+  // single occurrence regardless of whether it came from a series.
+  async function createExceptionOverride(occurrence: EventOccurrence, patch: Partial<PlantasksEvent>) {
     const base = events.find((e) => e.id === occurrence.seriesId);
     if (!base) return;
     try {
@@ -142,6 +129,71 @@ export default function PlantasksHome({ email, userId }: { email?: string; userI
     } catch {
       setError("Couldn't update this occurrence. Try again.");
     }
+  }
+
+  async function handleEditOccurrence(
+    occurrence: EventOccurrence,
+    patch: Partial<PlantasksEvent>,
+    scope: "this" | "all"
+  ) {
+    // Non-virtual rows (one-offs and existing exceptions) are already
+    // isolated to a single date — just edit the row directly regardless
+    // of the scope the sheet resolved (it only prompts for virtual ones).
+    if (!occurrence.isVirtual) {
+      return handleUpdate(occurrence.id, patch);
+    }
+    if (scope === "all") {
+      return handleUpdate(occurrence.seriesId!, patch);
+    }
+    return createExceptionOverride(occurrence, patch);
+  }
+
+  // Drag-to-move a single-day chip to a new date (same time-of-day).
+  // Dragging one instance of a recurring series always moves just that
+  // instance — moving the whole series is a deliberate edit-sheet action,
+  // not something a quick drag should silently do.
+  async function handleMoveEvent(occurrence: EventOccurrence, newDate: Date) {
+    const dayDelta = Math.round(
+      (dateOnly(newDate).getTime() - dateOnly(new Date(occurrence.start_at)).getTime()) / 86400000
+    );
+    if (dayDelta === 0) return;
+
+    const patch = {
+      start_at: addDays(new Date(occurrence.start_at), dayDelta).toISOString(),
+      end_at: addDays(new Date(occurrence.end_at), dayDelta).toISOString(),
+    };
+
+    if (occurrence.isVirtual) {
+      return createExceptionOverride(occurrence, patch);
+    }
+    return handleUpdate(occurrence.id, patch);
+  }
+
+  // Edge-resize a multi-day bar — extends/shrinks the span by whole days,
+  // never touching time-of-day. Clamped so the dragged edge can't cross
+  // the fixed one.
+  async function handleResizeEvent(occurrence: EventOccurrence, edge: "start" | "end", dayDelta: number) {
+    if (dayDelta === 0) return;
+
+    const start = new Date(occurrence.start_at);
+    const end = new Date(occurrence.end_at);
+
+    let newStart = start;
+    let newEnd = end;
+    if (edge === "start") {
+      newStart = addDays(start, dayDelta);
+      if (dateOnly(newStart) > dateOnly(end)) newStart = new Date(end.getFullYear(), end.getMonth(), end.getDate(), start.getHours(), start.getMinutes());
+    } else {
+      newEnd = addDays(end, dayDelta);
+      if (dateOnly(newEnd) < dateOnly(start)) newEnd = new Date(start.getFullYear(), start.getMonth(), start.getDate(), end.getHours(), end.getMinutes());
+    }
+
+    const patch = { start_at: newStart.toISOString(), end_at: newEnd.toISOString() };
+
+    if (occurrence.isVirtual) {
+      return createExceptionOverride(occurrence, patch);
+    }
+    return handleUpdate(occurrence.id, patch);
   }
 
   async function handleDeleteOccurrence(occurrence: EventOccurrence, scope: "this" | "all") {
@@ -201,6 +253,8 @@ export default function PlantasksHome({ email, userId }: { email?: string; userI
               events={visibleEvents}
               onSelectDay={setSelectedDate}
               onSelectEvent={(event) => setSelectedDate(new Date(event.start_at))}
+              onMoveEvent={handleMoveEvent}
+              onResizeEvent={handleResizeEvent}
             />
           )}
         </div>

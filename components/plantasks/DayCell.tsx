@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useDroppable } from "@dnd-kit/core";
 import type { PlantasksEvent } from "@/lib/plantasks/types";
 import EventChip from "./EventChip";
 
@@ -26,8 +27,14 @@ export default function DayCell({
   const visible = events.slice(0, MAX_VISIBLE_CHIPS);
   const overflow = events.length - visible.length;
 
+  const { setNodeRef, isOver } = useDroppable({
+    id: date.toISOString(),
+    data: { date },
+  });
+
   return (
     <motion.div
+      ref={setNodeRef}
       role="button"
       tabIndex={0}
       onClick={() => onSelectDay(date)}
@@ -40,9 +47,11 @@ export default function DayCell({
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 28 }}
       className={`flex min-h-[92px] cursor-pointer flex-col items-stretch gap-0.5 rounded-xl border p-1.5 text-left transition-colors ${
-        inCurrentMonth
-          ? "border-white/5 bg-white/[0.03] hover:bg-white/[0.06]"
-          : "border-transparent bg-transparent opacity-40"
+        isOver
+          ? "border-white/30 bg-white/[0.1]"
+          : inCurrentMonth
+            ? "border-white/5 bg-white/[0.03] hover:bg-white/[0.06]"
+            : "border-transparent bg-transparent opacity-40"
       }`}
       style={{ paddingTop: topOffset + 6 }}
     >
