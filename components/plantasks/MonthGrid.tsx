@@ -46,6 +46,7 @@ export default function MonthGrid({
   const today = new Date();
 
   const gridRowRef = useRef<HTMLDivElement>(null);
+  const todayRef = useRef<HTMLDivElement>(null);
   const [activeDragEvent, setActiveDragEvent] = useState<EventOccurrence | null>(null);
   const [resizing, setResizing] = useState<{
     event: EventOccurrence;
@@ -78,6 +79,16 @@ export default function MonthGrid({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resizing]);
+
+  // Bring today into view (away from the fixed tab bar/app-bar) whenever
+  // the visible month changes to include it — the grid is taller than most
+  // viewports, so without this "today" can land right behind the tab bar.
+  useEffect(() => {
+    const id = setTimeout(() => {
+      todayRef.current?.scrollIntoView({ block: "center", behavior: "instant" as ScrollBehavior });
+    }, 150);
+    return () => clearTimeout(id);
+  }, [viewDate]);
 
   function handleDragStart(e: DragStartEvent) {
     setActiveDragEvent((e.active.data.current?.event as EventOccurrence) ?? null);
@@ -120,20 +131,24 @@ export default function MonthGrid({
             return (
               <div key={weekIndex} className="relative">
                 <div ref={weekIndex === 0 ? gridRowRef : undefined} className="grid grid-cols-7 gap-1">
-                  {week.map((date) => (
-                    <DayCell
-                      key={date.toISOString()}
-                      date={date}
-                      inCurrentMonth={isSameMonth(date, viewDate)}
-                      isToday={isSameDay(date, today)}
-                      events={singleDayEvents.filter((e) =>
-                        isSameDay(new Date(e.start_at), date)
-                      )}
-                      topOffset={topOffset}
-                      onSelectDay={onSelectDay}
-                      onSelectEvent={(event) => onSelectEvent(event as EventOccurrence)}
-                    />
-                  ))}
+                  {week.map((date) => {
+                    const isToday = isSameDay(date, today);
+                    return (
+                      <div key={date.toISOString()} ref={isToday ? todayRef : undefined}>
+                        <DayCell
+                          date={date}
+                          inCurrentMonth={isSameMonth(date, viewDate)}
+                          isToday={isToday}
+                          events={singleDayEvents.filter((e) =>
+                            isSameDay(new Date(e.start_at), date)
+                          )}
+                          topOffset={topOffset}
+                          onSelectDay={onSelectDay}
+                          onSelectEvent={(event) => onSelectEvent(event as EventOccurrence)}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
 
                 {laneCount > 0 && (

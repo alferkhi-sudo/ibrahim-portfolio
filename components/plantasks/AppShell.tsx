@@ -88,7 +88,7 @@ export default function AppShell({
   children,
 }: AppShellProps) {
   return (
-    <div className="relative flex min-h-[100dvh] flex-col text-white">
+    <div className="relative flex h-[100dvh] flex-col overflow-hidden text-white">
       {/* Top app-bar */}
       <header
         className="sticky top-0 z-40 border-b border-white/10 bg-black/20 backdrop-blur-2xl"
@@ -128,6 +128,12 @@ export default function AppShell({
 
       {/* Scrollable content */}
       <main className="relative flex-1 overflow-y-auto px-4 py-4 pb-28">{children}</main>
+
+      {/* Soft fade so content scrolling under the tab bar doesn't cut off abruptly */}
+      <div
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-30 h-24"
+        style={{ background: "linear-gradient(to top, #0b0c10, transparent)" }}
+      />
 
       {/* Bottom mobile tab bar */}
       <nav
