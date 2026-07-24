@@ -24,7 +24,7 @@ export default async function middleware(request: NextRequest) {
   }
 
   // Weekplan pages — check auth cookie
-  if (pathname.startsWith("/weekplan")) {
+  if (pathname === "/weekplan" || pathname.startsWith("/weekplan/")) {
     if (pathname === "/weekplan/login") {
       return NextResponse.next();
     }
@@ -44,7 +44,7 @@ export default async function middleware(request: NextRequest) {
   // PlanTasks pages — check Supabase session
   // (manifest.webmanifest is excluded by the matcher below already, since
   // any path containing a "." is skipped by the middleware entirely)
-  if (pathname.startsWith("/plantasks")) {
+  if (pathname === "/plantasks" || pathname.startsWith("/plantasks/")) {
     if (pathname === "/plantasks/login") {
       return NextResponse.next();
     }
