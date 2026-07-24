@@ -46,6 +46,6 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next|_vercel|restaurantform|.*\\..*).*)",
+    "/((?!_next|_vercel|.*\\..*).*)",
   ],
 };
