@@ -7,5 +7,5 @@ export default async function PlantasksPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return <PlantasksHome email={user?.email} />;
+  return <PlantasksHome email={user?.email} userId={user?.id ?? ""} />;
 }

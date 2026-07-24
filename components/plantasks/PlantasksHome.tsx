@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AppShell from "./AppShell";
 import AppBackground from "./AppBackground";
@@ -10,26 +10,25 @@ import DayDetailSheet from "./DayDetailSheet";
 import GlassPanel from "./GlassPanel";
 import SignOutButton from "./SignOutButton";
 import { addMonths, isSameDay } from "@/lib/plantasks/calendarMath";
-import { makeDummyEvents } from "@/lib/plantasks/dummyEvents";
+import { fetchEvents, createEvent, updateEvent, deleteEvent } from "@/lib/plantasks/api";
 import type { EventCategory, NewPlantasksEvent, PlantasksEvent } from "@/lib/plantasks/types";
 
-let localIdCounter = 0;
-function localId() {
-  localIdCounter += 1;
-  return `local-${Date.now()}-${localIdCounter}`;
-}
-
-// Phase 4: real month grid, in-memory events (seeded with dummy data).
-// Phase 5 swaps the local state mutations below for Supabase reads/writes —
-// the shape is already identical to PlantasksEvent so the swap is a
-// drop-in replacement, not a rewrite.
-export default function PlantasksHome({ email }: { email?: string }) {
+export default function PlantasksHome({ email, userId }: { email?: string; userId: string }) {
   const [activeTab, setActiveTab] = useState<"today" | "calendar">("calendar");
   const [viewDate, setViewDate] = useState(() => new Date());
-  const [events, setEvents] = useState<PlantasksEvent[]>(() => makeDummyEvents());
+  const [events, setEvents] = useState<PlantasksEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [hidden, setHidden] = useState<Set<EventCategory>>(new Set());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
+
+  useEffect(() => {
+    fetchEvents()
+      .then(setEvents)
+      .catch(() => setError("Couldn't load your events. Try refreshing."))
+      .finally(() => setLoading(false));
+  }, []);
 
   const monthLabel = useMemo(
     () => viewDate.toLocaleDateString("en-US", { month: "long", year: "numeric" }),
@@ -64,22 +63,31 @@ export default function PlantasksHome({ email }: { email?: string }) {
     });
   }
 
-  function handleCreate(newEvent: NewPlantasksEvent) {
-    const now = new Date().toISOString();
-    setEvents((prev) => [
-      ...prev,
-      { ...newEvent, id: localId(), user_id: "local", created_at: now, updated_at: now },
-    ]);
+  async function handleCreate(newEvent: NewPlantasksEvent) {
+    try {
+      const created = await createEvent(userId, newEvent);
+      setEvents((prev) => [...prev, created]);
+    } catch {
+      setError("Couldn't save that event. Try again.");
+    }
   }
 
-  function handleUpdate(id: string, patch: Partial<PlantasksEvent>) {
-    setEvents((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, ...patch, updated_at: new Date().toISOString() } : e))
-    );
+  async function handleUpdate(id: string, patch: Partial<PlantasksEvent>) {
+    try {
+      const updated = await updateEvent(id, patch);
+      setEvents((prev) => prev.map((e) => (e.id === id ? updated : e)));
+    } catch {
+      setError("Couldn't save your changes. Try again.");
+    }
   }
 
-  function handleDelete(id: string) {
-    setEvents((prev) => prev.filter((e) => e.id !== id));
+  async function handleDelete(id: string) {
+    try {
+      await deleteEvent(id);
+      setEvents((prev) => prev.filter((e) => e.id !== id));
+    } catch {
+      setError("Couldn't delete that event. Try again.");
+    }
   }
 
   function goToday() {
@@ -106,12 +114,26 @@ export default function PlantasksHome({ email }: { email?: string }) {
       >
         <div className="mx-auto flex max-w-2xl flex-col gap-4">
           <CategoryLegend hidden={hidden} onToggle={toggleCategory} />
-          <MonthGrid
-            viewDate={viewDate}
-            events={visibleEvents}
-            onSelectDay={setSelectedDate}
-            onSelectEvent={(event) => setSelectedDate(new Date(event.start_at))}
-          />
+
+          {error && (
+            <div className="flex items-center justify-between rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+              {error}
+              <button onClick={() => setError(null)} className="text-red-200/60 hover:text-red-100">
+                ✕
+              </button>
+            </div>
+          )}
+
+          {loading ? (
+            <p className="py-12 text-center text-sm text-white/30">Loading your calendar…</p>
+          ) : (
+            <MonthGrid
+              viewDate={viewDate}
+              events={visibleEvents}
+              onSelectDay={setSelectedDate}
+              onSelectEvent={(event) => setSelectedDate(new Date(event.start_at))}
+            />
+          )}
         </div>
       </AppShell>
 
